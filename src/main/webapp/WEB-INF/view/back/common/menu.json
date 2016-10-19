@@ -1,0 +1,92 @@
+[
+    {
+        "menuid": "20",
+        "icon": "icon-sys",
+        "menuname": "统计分析",
+        "menus": [
+            {
+                "menuid": "201",
+                "menuname": "出单量统计",
+                "icon": "icon-nav",
+                "url": "/eoms/menu.do?linkName=reportInfoPage"
+            }
+        ]
+    },
+    {
+        "menuid": "10",
+        "icon": "icon-sys",
+        "menuname": "日志管理",
+        "menus": [
+            {
+                "menuid": "101",
+                "menuname": "业务日志查询",
+                "icon": "icon-nav",
+                "url": "/eoms/menu.do?linkName=logDataPage"
+            }
+        ]
+    },
+    {
+        "menuid": "30",
+        "icon": "icon-sys",
+        "menuname": "规则管理",
+        "menus": [
+            {
+                "menuid": "301",
+                "menuname": "佣金规则配置",
+                "icon": "icon-nav",
+                "url": "#"
+            },
+            {
+                "menuid": "302",
+                "menuname": "渠道规则配置",
+                "icon": "icon-nav",
+                "url": "#"
+            }
+        ]
+    },
+    {
+        "menuid": "40",
+        "icon": "icon-sys",
+        "menuname": "批改管理",
+        "menus": [
+            {
+                "menuid": "401",
+                "menuname": "批改数据导入",
+                "icon": "icon-nav",
+                "url": "/eoms/menu.do?linkName=endorInput"
+            },
+            {
+                "menuid": "402",
+                "menuname": "批改数据查询",
+                "icon": "icon-nav",
+                "url": "/eoms/menu.do?linkName=endorManage"
+            }
+        ]
+    },
+    {
+        "menuid": "40",
+        "icon": "icon-sys",
+        "menuname": "对账管理",
+        "menus": [
+            {
+                "menuid": "401",
+                "menuname": "对账查询",
+                "icon": "icon-nav",
+                "url": "/eoms/menu.do?linkName=checkAmountManage"
+            }
+        ]
+    },
+    {
+        "menuid": "50",
+        "icon": "icon-sys",
+        "menuname": "缓存管理",
+        "menus": [
+            {
+                "menuid": "501",
+                "menuname": "清理缓存",
+                "icon": "icon-nav",
+                "url": "/eoms/menu.do?linkName=clearRedisPage"
+            }
+        ]
+    }
+]
