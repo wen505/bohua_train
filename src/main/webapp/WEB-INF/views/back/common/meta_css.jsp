@@ -1,5 +1,5 @@
-<link rel="stylesheet" type="text/css" href="${ctx}/resources/plugin/jquery-easyui/themes/bootstrap/easyui.css">
-<link rel="stylesheet" type="text/css" href="${ctx}/resources/plugin/jquery-easyui/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="/static/plugin/jquery-easyui/themes/bootstrap/easyui.css">
+<link rel="stylesheet" type="text/css" href="/static/plugin/jquery-easyui/themes/icon.css">
 <style type="text/css">
 body {
 	font-family: "Microsoft YaHei";

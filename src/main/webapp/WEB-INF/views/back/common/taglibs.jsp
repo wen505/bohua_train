@@ -7,4 +7,5 @@
 <fmt:setBundle basename="i18n/messages"/>
 <script type="text/javascript">
   var contextRootPath = "${ctx}";
+  alert(contextRootPath);
 </script>

@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<%@ page contentType="text/html;charset=utf-8"%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -6,7 +8,7 @@
 
     <link rel="stylesheet" type="text/css" href="/static/plugin/bootstrap-3.3.5/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
-    <script src="${jquery}"></script>
+    <script src="/static/js/jquery-2.1.1.min.js"></script>
 
     <style type="text/css">
         html,body {
@@ -102,7 +104,7 @@
         </div>
         <div class="login-content ">
             <div class="form">
-                <form action="/login.html" method="post">
+                <form action="/back/login.html" method="post">
                     <div class="form-group">
                         <div class="col-xs-12  ">
                             <div class="input-group">
@@ -115,11 +117,11 @@
                         <div class="col-xs-12  ">
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                <input type="text" id="passWord" name="passWord" class="form-control" placeholder="密码">
+                                <input type="text" id="password" name="password" class="form-control" placeholder="密码">
                             </div>
                         </div>
                     </div>
-                    <div class="form-group" style="display: none">
+                    <%--<div class="form-group" style="display: none">
                         <div class="col-xs-12  ">
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
@@ -129,7 +131,7 @@
                                 <label for="img_captcha" class="field"></label> <img title="点击更换" id="img_captcha" onclick="javascript:refreshCaptcha();" src="servlet/captchaCode">(看不清<a href="javascript:void(0)" onclick="javascript:refreshCaptcha()">换一张</a>)
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
                     <div class="form-group form-actions">
                         <div class="col-xs-4 col-xs-offset-4 ">
                             <button type="button" class="btn btn-sm btn-info" id="loginButton"><span class="glyphicon glyphicon-off"></span> 登录</button>
@@ -157,10 +159,11 @@
 
 </body>
 <script type="application/javascript">
-    var _captcha_id = "#img_captcha";
+    /*var _captcha_id = "#img_captcha";
     function refreshCaptcha() {
         $(_captcha_id).attr("src","servlet/captchaCode?t=" + Math.random());
-    }
+    }*/
+    alert(location.href);
     $('#loginButton').click(function () {
         var queryParam = "{'";
         $(".input-group:visible input").each(function(){
@@ -178,11 +181,12 @@
             success: function(result){
                 result = JSON.parse(result);
                 var code = result.code;
-                if (code == 0) {
-                    window.location.href = "success.html";
+                if (code == '1') {
+                    window.location.href = "goHome.html";
                 }
-                else if (code == 2) {
-                    $('.form-group').eq(2).removeAttr('style');
+                else if (code == '2') {
+                    /*$('.form-group').eq(2).removeAttr('style');*/
+                    alert(result.msg);
                 }
                 else {
                     alert(result.msg);
@@ -210,4 +214,5 @@
      }
      });*/
 </script>
+
 </html>

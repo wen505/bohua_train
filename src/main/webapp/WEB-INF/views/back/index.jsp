@@ -1,8 +1,8 @@
-<!DOCTYPE html>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="common/taglibs.jsp"%>
 <%@ include file="common/meta_css.jsp"%>
 <%@ include file="common/meta_js.jsp"%>
+<!DOCTYPE html>
 <html>
 <head>
 <title>运维管理平台</title>
@@ -10,7 +10,7 @@
 $(function() {
 	tabClose();
 	tabCloseEven();
-	$.getJSON("/eoms/common/menu.json", function(data){
+	$.getJSON("/static/menu.json", function(data){
 		addNav(data);
 		InitLeftMenu(data);
 	});
@@ -188,10 +188,10 @@ function tabCloseEven() {
 </script>
 </head>
 <body class="easyui-layout">
-	 <div region="north" split="true" border="false" style="overflow: hidden; height: 30px;background: url(/eoms/resources/img/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%;
+	 <div region="north" split="true" border="false" style="overflow: hidden; height: 30px;background: url(/static/img/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%;
         line-height: 20px;color: #fff; font-family: Verdana, 微软雅黑,黑体">
         <span style="float:right; padding-right:20px;" class="head">欢迎 管理员</span>
-        <span style="padding-left:10px; font-size: 16px; float:left;"><img src="/eoms/resources/img/blocks.gif" width="20" height="20" align="absmiddle" /> 运维管理平台</span>
+        <span style="padding-left:10px; font-size: 16px; float:left;"><img src="/static/img/blocks.gif" width="20" height="20" align="absmiddle" /> 运维管理平台</span>
     </div>
 	
 	<div region="west" split="true" title="导航菜单" style="width:200px;">
