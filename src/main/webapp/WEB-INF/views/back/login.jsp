@@ -104,7 +104,7 @@
         </div>
         <div class="login-content ">
             <div class="form">
-                <form action="/back/login.html" method="post">
+                <form action="/back/login" method="post">
                     <div class="form-group">
                         <div class="col-xs-12  ">
                             <div class="input-group">
@@ -163,7 +163,6 @@
     function refreshCaptcha() {
         $(_captcha_id).attr("src","servlet/captchaCode?t=" + Math.random());
     }*/
-    alert(location.href);
     $('#loginButton').click(function () {
         var queryParam = "{'";
         $(".input-group:visible input").each(function(){
@@ -176,13 +175,13 @@
         queryParam = eval("("+queryParam+")");
         $.ajax({
             type: "POST",
-            url: "login.html",
+            url: "login",
             data: queryParam,
+            dataType : "json",
             success: function(result){
-                result = JSON.parse(result);
                 var code = result.code;
                 if (code == '1') {
-                    window.location.href = "goHome.html";
+                    window.location.href = "home";
                 }
                 else if (code == '2') {
                     /*$('.form-group').eq(2).removeAttr('style');*/

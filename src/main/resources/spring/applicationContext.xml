@@ -12,6 +12,4 @@
     <!--自动扫描含有@Service将其注入为bean -->
     <context:component-scan base-package="com.bh.train.service" />
 
-    <import resource="classpath:mybatis/spring-mybatis.xml"/>
-
 </beans>

@@ -56,7 +56,7 @@ public class LoginController {
         return "/common/error";
     }
 
-    @RequestMapping("/goHome")
+    @RequestMapping("/home")
     public String goHome(){
         return "/back/index";
     }
