@@ -22,18 +22,37 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
-      <scope>provided</scope>
-    </dependency>
+      <!-- servlet -->
+      <dependency>
+          <groupId>org.glassfish</groupId>
+          <artifactId>javax.servlet</artifactId>
+          <version>3.0.1</version>
+          <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.glassfish</groupId>
+          <artifactId>javax.servlet.jsp</artifactId>
+          <version>3.0.1</version>
+          <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.glassfish</groupId>
+          <artifactId>javax.servlet.jsp.jstl</artifactId>
+          <version>3.0.1</version>
+          <scope>provided</scope>
+      </dependency>
+      <!-- anction返回 加载jsp需要 -->
+      <dependency>
+          <groupId>taglibs</groupId>
+          <artifactId>standard</artifactId>
+          <version>1.1.2</version>
+      </dependency>
 
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>jstl</artifactId>
-      <version>1.2</version>
-    </dependency>
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>jstl</artifactId>
+          <version>1.2</version>
+      </dependency>
 
     <!-- http://mvnrepository.com/artifact/commons-io/commons-io -->
     <dependency>
