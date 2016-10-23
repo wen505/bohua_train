@@ -195,7 +195,6 @@
     update bh_user
     set login_name = #{loginName,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
       telephone = #{telephone,jdbcType=VARCHAR},
       indentity = #{indentity,jdbcType=VARCHAR},
@@ -204,17 +203,162 @@
       address = #{address,jdbcType=VARCHAR},
       user_type = #{userType,jdbcType=VARCHAR},
       sn = #{sn,jdbcType=INTEGER},
-      add_time = #{addTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      enabled_flag = #{enabledFlag,jdbcType=VARCHAR}
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 
+  <!--登录验证-->
   <select id="selectForLogin" resultMap="BaseResultMap" parameterType="com.bh.train.vo.LoginReqVo" >
     select
     <include refid="Base_Column_List" />
     from bh_user
-    where user_name = #{userName,jdbcType=VARCHAR}
+    where login_name = #{userName,jdbcType=VARCHAR}
     AND  password = #{password,jdbcType=VARCHAR}
+    and enabled_flag = 'Y'
+  </select>
+  <!-- 修改用户密码 -->
+  <update id="updateUserPassword" parameterType="com.bh.train.vo.LoginReqVo">
+    update bh_user
+    set password = #{newPassword,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+  <!-- 根据登录名修改用户密码 -->
+  <update id="updateUserPasswordByLoginName" parameterType="com.bh.train.vo.LoginReqVo">
+    update bh_user
+    set password = #{password,jdbcType=VARCHAR}
+    where login_name = #{userName,jdbcType=VARCHAR}
+  </update>
+
+  <!-- 模糊查询用户信息 分页查询 -->
+  <select id="selectPage" parameterType="com.bh.train.model.BhUser"
+          resultMap="BaseResultMap">
+    SELECT su.*
+    FROM bh_user su
+    WHERE su.enabled_flag = 'Y'
+    <if test="loginName != null and loginName!='' ">
+      AND su.login_name like
+      CONCAT('%',#{loginName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="userName != null and userName!='' ">
+      AND su.user_name like
+      CONCAT('%',#{userName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="roleId!= null ">
+      and su.user_id in (
+      select sr1.user_id FROM bh_user_role sr1 WHERE role_id = #{roleId,jdbcType=INTEGER}
+      )
+    </if>
+    order by user_id
+    limit #{start},#{limit}
+  </select>
+  <!-- 根据模糊条件查询出总记录数 -->
+  <select id="selectCount" parameterType="com.bh.train.model.BhUser"
+          resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM bh_user su
+    WHERE su.enabled_flag = 'Y'
+    <if test="loginName != null and loginName!='' ">
+      AND su.login_name like
+      CONCAT('%',#{loginName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="userName != null and userName!='' ">
+      AND su.user_name like
+      CONCAT('%',#{userName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="roleId!= null ">
+      and su.user_id in (
+      select sr1.user_id FROM bh_user_role sr1 WHERE role_id = #{roleId,jdbcType=INTEGER}
+      )
+    </if>
+  </select>
+  <!-- 批量修改用户信息的可用状态 -->
+  <update id="updatbatchUserEnabledFlag" parameterType="java.util.List">
+    UPDATE bh_user
+    set enabled_flag = 'N'
+    WHERE user_id IN
+    <foreach close=")" collection="list" item="item" open="("
+             separator=",">
+      #{item.userId,jdbcType=INTEGER}
+    </foreach>
+  </update>
+
+  <!-- 删除用户角色关联表 -->
+  <delete id="deleteBathUserRole" parameterType="java.util.List">
+    delete from bh_user_role where user_id in
+    <foreach collection="list" item="item" open="(" close=")"
+             separator=",">
+      #{item.userId,jdbcType=INTEGER}
+    </foreach>
+  </delete>
+  <!-- 根据登录名查询用户 -->
+  <select id="selectUserByLoginName" parameterType="java.lang.String"
+          resultMap="BaseResultMap">
+    select * from bh_user
+    where login_name = #{loginName,jdbcType=VARCHAR}
+  </select>
+
+  <!-- 根据用户id删除用户角色关联表 -->
+  <delete id="deleteUserRoleByUserId" parameterType="java.lang.Integer">
+    delete from bh_user_role
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <!-- 批量添加用户与角色关联的表中的数据 -->
+  <insert id="insertBatchUserRole" parameterType="java.util.List">
+    INSERT INTO bh_user_role (user_role_id,roleid,user_id)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.userRoleId,jdbcType=INTEGER},#{item.roleId,jdbcType=INTEGER},#{item.userId,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+
+
+  <!-- 查询不在制定角色下的用户-->
+  <select id="findNotUserByRoleid" parameterType="com.bh.train.model.BhUser" resultMap="BaseResultMap" >
+    SELECT * FROM
+    sys_user su
+    WHERE
+    su.UserID NOT in (
+    SELECT
+    sur2.UserID
+    FROM
+    sys_user_role sur2
+    WHERE
+    sur2.RoleID =#{roleid,jdbcType=VARCHAR}
+    )
+    and su.EnabledFlag = 'Y'
+    <if test="loginname != null and loginname!='' ">
+      and su.loginname like
+      CONCAT('%',#{loginname,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="username != null and username!='' ">
+      AND su.username like
+      CONCAT('%',#{username,jdbcType=VARCHAR},'%')
+    </if>
+    order by su.userid
+    limit #{start},#{limit}
+  </select>
+  <!-- 查询不在制定角色下的用户记录数 -->
+  <select id="findNotUserCountByRoleid" parameterType="com.bh.train.model.BhUser" resultType="java.lang.Integer">
+    SELECT count(1) FROM
+    sys_user su
+    WHERE
+    su.UserID NOT in (
+    SELECT
+    sur2.UserID
+    FROM
+    sys_user_role sur2
+    WHERE
+    sur2.RoleID =#{roleid,jdbcType=VARCHAR}
+    )
+    and su.EnabledFlag = 'Y'
+    <if test="loginname != null and loginname!='' ">
+      and su.loginname like
+      CONCAT('%',#{loginname,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="username != null and username!='' ">
+      AND su.username like
+      CONCAT('%',#{username,jdbcType=VARCHAR},'%')
+    </if>
   </select>
 </mapper>
