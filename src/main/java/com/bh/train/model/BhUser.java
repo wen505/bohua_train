@@ -1,8 +1,10 @@
 package com.bh.train.model;
 
+import com.bh.train.common.model.BaseModel;
+
 import java.util.Date;
 
-public class BhUser {
+public class BhUser extends BaseModel {
     private Integer userId;
 
     private String loginName;

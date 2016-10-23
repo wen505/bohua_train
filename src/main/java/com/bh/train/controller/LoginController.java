@@ -1,19 +1,25 @@
 package com.bh.train.controller;
 
 import com.bh.train.common.Constant;
+import com.bh.train.common.controller.BaseController;
 import com.bh.train.common.exception.BusinessException;
+import com.bh.train.common.tree.CheckTreeNode;
+import com.bh.train.common.util.PageController;
 import com.bh.train.common.vo.RspData;
 import com.bh.train.model.BhUser;
+import com.bh.train.model.BhUserRole;
 import com.bh.train.service.UserService;
 import com.bh.train.vo.LoginReqVo;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 /**
@@ -21,9 +27,8 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping("/back")
-public class LoginController {
+public class LoginController extends BaseController<LoginController> {
 
-    private Logger LOGGER = Logger.getLogger(LoginController.class);
     @Resource
     private UserService userService;
 
@@ -32,14 +37,19 @@ public class LoginController {
         return "/back/login";
     }
 
+    /**
+     *登陆
+     * @param loginReqVo
+     * @param request
+     * @return
+     */
     @RequestMapping("/login")
     @ResponseBody
     public RspData login(LoginReqVo loginReqVo, HttpServletRequest request) {
-        HttpSession session = request.getSession();
         BhUser user = null;
         try {
             user = userService.login(loginReqVo);
-            session.setAttribute(Constant.LOGIN_USER,user);
+            getSession().setAttribute(Constant.LOGIN_USER,user);
         } catch (BusinessException e) {
             return RspData.error("2", e.getMessage());
         }
