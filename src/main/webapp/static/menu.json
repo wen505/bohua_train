@@ -2,13 +2,13 @@
     {
         "menuid": "20",
         "icon": "icon-sys",
-        "menuname": "统计分析",
+        "menuname": "用户管理",
         "menus": [
             {
                 "menuid": "201",
                 "menuname": "出单量统计",
                 "icon": "icon-nav",
-                "url": "/eoms/menu.do?linkName=reportInfoPage"
+                "url": "/view/back/user/userManager.jsp?linkName=reportInfoPage"
             }
         ]
     },
