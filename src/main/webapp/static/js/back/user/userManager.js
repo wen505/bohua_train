@@ -46,17 +46,16 @@ var userManager = {
 	},
 	//重置密码
 	resetPwdByClick : function(userId,loginName){
-		$.messager.confirm('提示:','确定要操作？',function(r){
-			if(r){
-				var param = {"userId":userId,"loginName" :loginName};
-				commonUtil.ajaxSubmit("back/user/updateUserPassword.do",param,function () {
-					commonUtil.showMessages("重置密码失败！",'提示');
-				},function (data) {
-					ommonUtil.showMessages("重置密码成功！",'提示');
-					commonUtil.reloadtable("queryTable");
-				})
+		commonUtil.showConfirm('提示:','确定要操作？',function(){
+			var param = {"userId":userId,"userName" :loginName};
+			commonUtil.ajaxSubmit("back/user/resetPwd.do",param,function () {
+				commonUtil.showMessages("重置密码失败！",'提示');
+			},function (data) {
+				commonUtil.showMessages("重置密码成功！",'提示');
+				commonUtil.reloadtable("queryTable");
+			})
 
-			}});
+		});
 		
 	},
 	/**
@@ -70,6 +69,11 @@ var userManager = {
 	 *
 	 */
 	updateClickEvent : function () {
+		var rows = commonUtil.getChecked("queryTable");
+		if (rows == null || rows.length < 1 || rows.length > 1) {
+			commonUtil.showMessages("请选择一条要修改的用户", "提示");
+			return;
+		}
 		commonUtil.openWin("view/back/user/update_user.jsp","update_user","修改用户",800,400);
 
 	}

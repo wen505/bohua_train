@@ -353,7 +353,20 @@ var commonUtil = {
 			}
 		});
 	},
+	/**
+	 * 性别
+	 */
+	sexFormatter : function(value,row,index){
+		switch (value) {
+			case "1":
+				return "男";
+				break;
 
+			default:
+				return "女";
+				break;
+		}
+	},
 	/**
 	 * 
 	 * @param msg

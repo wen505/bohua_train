@@ -175,5 +175,22 @@ public class UserController extends BaseController<UserController> {
             return RspData.error(Constant.ERROR_CODE, "修改失败！");
         }
     }
-
+    /**
+     * 重置用户密码
+     * @param loginReqVo
+     * @return
+     */
+    @RequestMapping("/resetPwd")
+    @ResponseBody
+    public RspData  resetPwd(LoginReqVo loginReqVo){
+        try {
+            loginReqVo.setNewPassword(loginReqVo.getUserName());
+            boolean falg = userService.updateUserPassword(loginReqVo);
+            return  RspData.issuccess(falg);
+        } catch (BusinessException e) {
+            e.printStackTrace();
+            logger.error(e.getMessage(),e);
+            return RspData.error(Constant.ERROR_CODE, "修改失败！");
+        }
+    }
 }

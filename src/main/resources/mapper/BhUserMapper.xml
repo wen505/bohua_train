@@ -226,7 +226,7 @@
   <!-- 根据登录名修改用户密码 -->
   <update id="updateUserPasswordByLoginName" parameterType="com.bh.train.vo.LoginReqVo">
     update bh_user
-    set password = #{password,jdbcType=VARCHAR}
+    set password = #{newPassword,jdbcType=VARCHAR}
     where login_name = #{userName,jdbcType=VARCHAR}
   </update>
 

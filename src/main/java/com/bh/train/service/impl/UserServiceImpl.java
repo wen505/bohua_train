@@ -135,7 +135,7 @@ public class UserServiceImpl extends BaseService implements UserService{
         if (loginReqVo.getUserId()!=null){
             count= bhUserMapper.updateUserPassword(loginReqVo);
         }else if (StringUtils.isEmpty(loginReqVo.getUserName())){
-            count= bhUserMapper.updateUserPassword(loginReqVo);
+            count= bhUserMapper.updateUserPasswordByLoginName(loginReqVo);
         }
         return returnResult(count);
     }
