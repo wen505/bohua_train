@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bh.train.dao.BhDictionaryHeaderMapper" >
+  <resultMap id="BaseResultMap" type="com.bh.train.model.BhDictionaryHeader" >
+    <id column="header_code" property="headerCode" jdbcType="VARCHAR" />
+    <result column="header_name" property="headerName" jdbcType="VARCHAR" />
+    <result column="dictionary_type" property="dictionaryType" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="enabled_flag" property="enabledFlag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    header_code, header_name, dictionary_type, memo, add_time, update_time, enabled_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bh_dictionary_header
+    where header_code = #{headerCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bh_dictionary_header
+    where header_code = #{headerCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bh.train.model.BhDictionaryHeader" >
+    insert into bh_dictionary_header (header_code, header_name, dictionary_type, 
+      memo, add_time, update_time, 
+      enabled_flag)
+    values (#{headerCode,jdbcType=VARCHAR}, #{headerName,jdbcType=VARCHAR}, #{dictionaryType,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{enabledFlag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bh.train.model.BhDictionaryHeader" >
+    insert into bh_dictionary_header
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="headerCode != null" >
+        header_code,
+      </if>
+      <if test="headerName != null" >
+        header_name,
+      </if>
+      <if test="dictionaryType != null" >
+        dictionary_type,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="enabledFlag != null" >
+        enabled_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="headerCode != null" >
+        #{headerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="headerName != null" >
+        #{headerName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryType != null" >
+        #{dictionaryType,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabledFlag != null" >
+        #{enabledFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bh.train.model.BhDictionaryHeader" >
+    update bh_dictionary_header
+    <set >
+      <if test="headerName != null" >
+        header_name = #{headerName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryType != null" >
+        dictionary_type = #{dictionaryType,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabledFlag != null" >
+        enabled_flag = #{enabledFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where header_code = #{headerCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bh.train.model.BhDictionaryHeader" >
+    update bh_dictionary_header
+    set header_name = #{headerName,jdbcType=VARCHAR},
+      dictionary_type = #{dictionaryType,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      enabled_flag = #{enabledFlag,jdbcType=VARCHAR}
+    where header_code = #{headerCode,jdbcType=VARCHAR}
+  </update>
+</mapper>
