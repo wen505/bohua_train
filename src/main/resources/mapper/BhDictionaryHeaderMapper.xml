@@ -114,4 +114,40 @@
       enabled_flag = #{enabledFlag,jdbcType=VARCHAR}
     where header_code = #{headerCode,jdbcType=VARCHAR}
   </update>
+
+  <!-- 模糊查询用户信息 分页查询 -->
+  <select id="selectPage" parameterType="com.bh.train.model.BhDictionaryHeader"
+          resultMap="BaseResultMap">
+    SELECT su.*
+    FROM bh_dictionary_header su
+    WHERE su.enabled_flag = 'Y'
+    <if test="headerName != null and headerName!='' ">
+      AND su.header_name like
+      CONCAT('%',#{headerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="headerCode != null and headerCode!='' ">
+      AND su.header_code = #{headerCode,jdbcType=VARCHAR}
+    </if>
+    <if test="dictionaryType != null and dictionaryType != ''">
+      AND su.dictionary_type = #{dictionaryType,jdbcType=VARCHAR}
+    </if>
+    limit #{start},#{limit}
+  </select>
+  <!-- 根据模糊条件查询出总记录数 -->
+  <select id="selectCount" parameterType="com.bh.train.model.BhDictionaryHeader"
+          resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM bh_dictionary_header su
+    WHERE su.enabled_flag = 'Y'
+    <if test="headerName != null and headerName!='' ">
+      AND su.header_name like
+      CONCAT('%',#{headerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="headerCode != null and headerCode!='' ">
+      AND su.header_code = #{headerCode,jdbcType=VARCHAR}
+    </if>
+    <if test="dictionaryType != null and dictionaryType != ''">
+      AND su.dictionary_type = #{dictionaryType,jdbcType=VARCHAR}
+    </if>
+  </select>
 </mapper>

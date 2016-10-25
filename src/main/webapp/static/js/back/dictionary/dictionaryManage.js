@@ -7,7 +7,7 @@ var dictionaryManager = {
     realpath : null,
     dialog :null,
     init : function(){
-        commonUtil.init_dategrid("queryTable","字典查询", "back/dictionary/find.do", "headerCode", null, "queryPart");
+        commonUtil.init_dategrid("queryTable","字典查询", "back/dictionary/find", "headerCode", null, "queryPart");
     },
     //查询
     selectClick : function(){
@@ -40,6 +40,15 @@ var dictionaryManager = {
     updateClickEvent : function () {
         commonUtil.openWin("view/back/dictionary/update_dictionary.jsp","update_dictionary","修改字典",800,400);
 
+    },
+
+    typeFormatter : function (value,row,index) {
+        if(value == 'user'){
+            return '自定义';
+        }
+        else if(value == 'system'){
+            return '系统';
+        }
     }
 
 };

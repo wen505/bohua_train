@@ -66,13 +66,13 @@
     {
         "menuid": "40",
         "icon": "icon-sys",
-        "menuname": "对账管理",
+        "menuname": "字典配置",
         "menus": [
             {
                 "menuid": "401",
-                "menuname": "对账查询",
+                "menuname": "字典管理",
                 "icon": "icon-nav",
-                "url": "/eoms/menu.do?linkName=checkAmountManage"
+                "url": "/view/back/dictionary/dictionaryManage.jsp"
             }
         ]
     },

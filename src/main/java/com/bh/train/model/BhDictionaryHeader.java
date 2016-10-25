@@ -1,8 +1,10 @@
 package com.bh.train.model;
 
+import com.bh.train.common.model.BaseModel;
+
 import java.util.Date;
 
-public class BhDictionaryHeader {
+public class BhDictionaryHeader extends BaseModel {
     private String headerCode;
 
     private String headerName;
