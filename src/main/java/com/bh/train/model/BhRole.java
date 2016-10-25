@@ -1,12 +1,13 @@
 package com.bh.train.model;
 
+import com.bh.train.common.model.BaseModel;
+
 import java.util.Date;
 
 /**
  * 角色实体类
  */
-public class BhRole {
-    private Integer roleId;
+public class BhRole extends BaseModel {
 
     private String roleName;
 
@@ -20,13 +21,6 @@ public class BhRole {
 
     private String isBindUser;
 
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
 
     public String getRoleName() {
         return roleName;

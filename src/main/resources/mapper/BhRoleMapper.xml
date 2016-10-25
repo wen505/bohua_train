@@ -97,7 +97,6 @@
     set role_name = #{roleName,jdbcType=VARCHAR},
       memo = #{memo,jdbcType=VARCHAR},
       enabled_flag = #{enabledFlag,jdbcType=VARCHAR},
-      add_time = #{addTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where role_id = #{roleId,jdbcType=INTEGER}
   </update>
@@ -108,4 +107,57 @@
       LEFT JOIN (SELECT * FROM bh_user WHERE user_id =#{userId,jdbcType=INTEGER} ) u ON ur.user_id = u.user_id
       WHERE r.enabled_flag='Y'
   </select>
+  <!-- 模糊查询角色信息 分页查询 -->
+  <select id="selectPage" parameterType="com.bh.train.model.BhRole"
+          resultMap="BaseResultMap">
+    SELECT su.*
+    FROM bh_role su
+    WHERE su.enabled_flag = 'Y'
+    <if test="roleName != null and roleName!='' ">
+      AND su.role_name like
+      CONCAT('%',#{roleName,jdbcType=VARCHAR},'%')
+    </if>
+    order by role_id
+    limit #{start},#{limit}
+  </select>
+  <!-- 根据模糊条件查询出总记录数 -->
+  <select id="selectCount" parameterType="com.bh.train.model.BhUser"
+          resultType="java.lang.Integer">
+    SELECT COUNT(1)
+    FROM bh_role
+    WHERE enabled_flag = 'Y'
+    <if test="roleName != null and roleName!='' ">
+      AND role_name like
+      CONCAT('%',#{roleName,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
+  <!-- 批量修改角色信息的可用状态 -->
+  <update id="updatbatchRoleEnabledFlag" parameterType="java.util.List">
+    UPDATE bh_role
+    set enabled_flag = 'N'
+    WHERE role_id IN
+    <foreach close=")" collection="list" item="item" open="("
+             separator=",">
+      #{item.roleId,jdbcType=INTEGER}
+    </foreach>
+  </update>
+
+
+  <!-- 删除用户角色关联表 -->
+  <delete id="deleteBathUserRole" parameterType="java.util.List">
+    delete from bh_user_role where role_id in
+    <foreach collection="list" item="item" open="(" close=")"
+             separator=",">
+      #{item.RoleId,jdbcType=INTEGER}
+    </foreach>
+  </delete>
+
+  <!-- 删除角色权限关联表 -->
+  <delete id="deleteBathUserPermission" parameterType="java.util.List">
+    delete from bh_role_permission where role_id in
+    <foreach collection="list" item="item" open="(" close=")"
+             separator=",">
+      #{item.RoleId,jdbcType=INTEGER}
+    </foreach>
+  </delete>
 </mapper>
