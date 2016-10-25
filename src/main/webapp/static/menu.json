@@ -47,19 +47,13 @@
     {
         "menuid": "40",
         "icon": "icon-sys",
-        "menuname": "批改管理",
+        "menuname": "课程管理",
         "menus": [
             {
                 "menuid": "401",
-                "menuname": "批改数据导入",
+                "menuname": "课程管理",
                 "icon": "icon-nav",
-                "url": "/eoms/menu.do?linkName=endorInput"
-            },
-            {
-                "menuid": "402",
-                "menuname": "批改数据查询",
-                "icon": "icon-nav",
-                "url": "/eoms/menu.do?linkName=endorManage"
+                "url": "/view/back/course/courseManager.jsp"
             }
         ]
     },
