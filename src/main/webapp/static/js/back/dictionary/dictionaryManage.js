@@ -20,7 +20,7 @@ var dictionaryManager = {
 
     //删除
     delet:function(){
-        commonUtil.deleteOperate("请选择要删除的字典配置", "back/dictionary/delete.do", "queryTable", function(rows,customerArray){
+        commonUtil.deleteOperate("请选择要删除的字典配置", "back/dictionary/delete", "queryTable", function(rows,customerArray){
             for (var i = 0; i < rows.length; i++) {
                 customerArray.push({'headerCode': rows[i].headerCode});
             }
@@ -31,14 +31,14 @@ var dictionaryManager = {
      *
      */
     addClickEvent : function () {
-        commonUtil.openWin("view/back/dictionary/add_dictionary.jsp","add_dictionary","添加字典",800,400);
+        commonUtil.openWin("view/back/dictionary/addDictionary.jsp","add_dictionary","添加字典",800,400);
 
     },
     /**
      *
      */
     updateClickEvent : function () {
-        commonUtil.openWin("view/back/dictionary/update_dictionary.jsp","update_dictionary","修改字典",800,400);
+        commonUtil.openWin("view/back/dictionary/updateDictionary.jsp","update_dictionary","修改字典",800,400);
 
     },
 

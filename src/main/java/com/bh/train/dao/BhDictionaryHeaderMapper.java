@@ -2,7 +2,9 @@ package com.bh.train.dao;
 
 import com.bh.train.model.BhDictionaryHeader;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface BhDictionaryHeaderMapper {
     int deleteByPrimaryKey(String headerCode);
@@ -30,4 +32,6 @@ public interface BhDictionaryHeaderMapper {
      * @return
      */
     int selectCount(BhDictionaryHeader record);
+
+    int deleteDictionarys(Map<String, Object> map);
 }

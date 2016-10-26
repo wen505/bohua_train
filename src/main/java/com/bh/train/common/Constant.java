@@ -22,5 +22,17 @@ public class Constant {
      */
     public static final String SYSTEM_ERROR_CODE = "4";
 
+    /**
+     * session 中用户key值
+     */
     public static final String LOGIN_USER = "LOGIN_USER";
+
+    /**
+     * 与数据库可用标志对应
+     */
+    public static final String ENABLE_FLAG = "Y";
+    /**
+     * 与数据库不可用标志对应
+     */
+    public static final String UN_ENABLE_FLAG = "N";
 }

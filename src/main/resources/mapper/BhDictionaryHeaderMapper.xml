@@ -150,4 +150,20 @@
       AND su.dictionary_type = #{dictionaryType,jdbcType=VARCHAR}
     </if>
   </select>
+
+  <update id="deleteDictionarys" parameterType="java.util.Map">
+      UPDATE bh_dictionary_header
+      <set>
+          <if test="flag != null and flag != ''">
+              enabled_flag = #{flag,jdbcType=VARCHAR},
+          </if>
+          <if test="updateTime != null" >
+              update_time = #{updateTime,jdbcType=TIMESTAMP},
+          </if>
+      </set>
+      where header_code in
+      <foreach collection="headerCodes" item="headerCodes" index="index" open="(" separator="," close=")">
+          #{headerCodes}
+      </foreach>
+  </update>
 </mapper>
