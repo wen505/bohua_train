@@ -94,12 +94,12 @@ public interface BhUserMapper {
      * @param bhUser
      * @return
      */
-    List<BhUser> findNotUserByRoleid(BhUser bhUser);
+    List<BhUser> findNotUserByRoleId(BhUser bhUser);
 
     /**
      * 查询不在制定角色下的用户记录数
      * @param bhUser
      * @return
      */
-    int findNotUserCountByRoleid(BhUser bhUser);
+    int findNotUserCountByRoleId(BhUser bhUser);
 }

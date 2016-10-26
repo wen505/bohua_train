@@ -24,7 +24,8 @@ public class BaseModel {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")  //取日期时使用  
 	@DateTimeFormat(pattern = "yyyy-MM-dd")//存日期时使用  
 	private Date endtime;
-	private String roleId;
+
+
 
     private List<String> list;
 
@@ -58,17 +59,6 @@ public class BaseModel {
 
 	public void setEndtime(Date endtime) {
 		this.endtime = endtime;
-	}
-
-	/**
-	 * 角色id
-	 */
-	public String getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(String roleId) {
-		this.roleId = roleId;
 	}
 
 	public List<String> getList() {

@@ -25,7 +25,7 @@ public interface BhRoleMapper {
      * @param userId
      * @return
      */
-    List<BhRole> selectRoleelevancyRUserId(Integer userId);
+    List<BhRole> selectRoleRelevancyUserId(Integer userId);
 
     /**
      * 模糊查询角色信息 分页查询
@@ -60,5 +60,27 @@ public interface BhRoleMapper {
      * @param list
      * @return
      */
-   int deleteBathUserRole(List list);
+   int deleteBatchUserRole(List list);
+
+    /**
+     *批量添加用户与角色关联的表中的数据
+     * @param list
+     * @return
+     */
+    int insertBatchPermissionRole(List list);
+
+    /**
+     * 根据用户id删除用户角色关联表
+     * @param roleId
+     * @return
+     */
+    int deleteRolePermissionByRoleId(Integer roleId);
+
+    /**
+     * 删除用户角色关联表
+     * @param bhRole
+     * @return
+     */
+    int deleteBatchUserRoleByRoleId(BhRole bhRole);
+
 }

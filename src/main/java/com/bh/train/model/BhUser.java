@@ -7,6 +7,8 @@ import java.util.Date;
 public class BhUser extends BaseModel {
     private Integer userId;
 
+    private Integer roleId;
+
     private String loginName;
 
     private String userName;
@@ -153,5 +155,14 @@ public class BhUser extends BaseModel {
 
     public void setEnabledFlag(String enabledFlag) {
         this.enabledFlag = enabledFlag;
+    }
+
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 }

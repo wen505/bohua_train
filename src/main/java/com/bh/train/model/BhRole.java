@@ -21,6 +21,7 @@ public class BhRole extends BaseModel {
 
     private String isBindUser;
 
+    private Integer roleId;
 
     public String getRoleName() {
         return roleName;
@@ -61,7 +62,16 @@ public class BhRole extends BaseModel {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+    /**
+     * 角色id
+     */
+    public Integer getRoleId() {
+        return roleId;
+    }
 
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
     /**
      * 是否绑定用户
      */

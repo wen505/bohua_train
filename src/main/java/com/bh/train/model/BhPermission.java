@@ -27,6 +27,8 @@ public class BhPermission {
 
     private String enabledFlag;
 
+    private  String isBindRole;
+
     public Integer getPrmissionId() {
         return prmissionId;
     }
@@ -121,5 +123,13 @@ public class BhPermission {
 
     public void setEnabledFlag(String enabledFlag) {
         this.enabledFlag = enabledFlag == null ? null : enabledFlag.trim();
+    }
+
+    public String getIsBindRole() {
+        return isBindRole;
+    }
+
+    public void setIsBindRole(String isBindRole) {
+        this.isBindRole = isBindRole;
     }
 }

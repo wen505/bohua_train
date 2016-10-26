@@ -99,7 +99,7 @@ public class UserServiceImpl extends BaseService implements UserService{
         List<CheckTreeNode> treelist = new ArrayList<CheckTreeNode>();
         if (!StringUtils.isEmpty(userId)){
             Integer usId=Integer.parseInt(userId);
-            List<BhRole> bhRoles = bhRoleMapper.selectRoleelevancyRUserId(usId);
+            List<BhRole> bhRoles = bhRoleMapper.selectRoleRelevancyUserId(usId);
             for (BhRole bhRole : bhRoles) {
                 if (StringUtils.isEmpty(bhRole.getIsBindUser())){
                     CheckTreeNode check = new CheckTreeNode(bhRole.getRoleId()+"", null , bhRole.getRoleName(), false);

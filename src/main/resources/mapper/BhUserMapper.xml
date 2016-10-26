@@ -305,60 +305,59 @@
   </delete>
   <!-- 批量添加用户与角色关联的表中的数据 -->
   <insert id="insertBatchUserRole" parameterType="java.util.List">
-    INSERT INTO bh_user_role (user_role_id,roleid,user_id)
+    INSERT INTO bh_user_role (role_id,user_id)
     values
     <foreach collection="list" item="item" separator=",">
-      (#{item.userRoleId,jdbcType=INTEGER},#{item.roleId,jdbcType=INTEGER},#{item.userId,jdbcType=INTEGER})
+      (#{item.roleId,jdbcType=INTEGER},#{item.userId,jdbcType=INTEGER})
     </foreach>
   </insert>
 
-
   <!-- 查询不在制定角色下的用户-->
-  <select id="findNotUserByRoleid" parameterType="com.bh.train.model.BhUser" resultMap="BaseResultMap" >
+  <select id="findNotUserByRoleId" parameterType="com.bh.train.model.BhUser" resultMap="BaseResultMap" >
     SELECT * FROM
-    sys_user su
+    bh_user su
     WHERE
-    su.UserID NOT in (
+    su.user_id NOT in (
     SELECT
-    sur2.UserID
+    sur2.user_id
     FROM
-    sys_user_role sur2
+    bh_user_role sur2
     WHERE
-    sur2.RoleID =#{roleid,jdbcType=VARCHAR}
+    sur2.role_id =#{roleId,jdbcType=INTEGER}
     )
-    and su.EnabledFlag = 'Y'
-    <if test="loginname != null and loginname!='' ">
-      and su.loginname like
-      CONCAT('%',#{loginname,jdbcType=VARCHAR},'%')
+    and su.enabled_flag = 'Y'
+    <if test="loginName != null and loginName!='' ">
+      and su.login_name like
+      CONCAT('%',#{loginName,jdbcType=VARCHAR},'%')
     </if>
-    <if test="username != null and username!='' ">
-      AND su.username like
-      CONCAT('%',#{username,jdbcType=VARCHAR},'%')
+    <if test="userName != null and userName!='' ">
+      AND su.user_name like
+      CONCAT('%',#{userName,jdbcType=VARCHAR},'%')
     </if>
-    order by su.userid
+    order by su.user_id
     limit #{start},#{limit}
   </select>
   <!-- 查询不在制定角色下的用户记录数 -->
-  <select id="findNotUserCountByRoleid" parameterType="com.bh.train.model.BhUser" resultType="java.lang.Integer">
-    SELECT count(1) FROM
-    sys_user su
+  <select id="findNotUserCountByRoleId" parameterType="com.bh.train.model.BhUser" resultType="java.lang.Integer">
+    SELECT COUNT(1) FROM
+    bh_user su
     WHERE
-    su.UserID NOT in (
+    su.user_id NOT in (
     SELECT
-    sur2.UserID
+    sur2.user_id
     FROM
-    sys_user_role sur2
+    bh_user_role sur2
     WHERE
-    sur2.RoleID =#{roleid,jdbcType=VARCHAR}
+    sur2.role_id =#{roleId,jdbcType=INTEGER}
     )
-    and su.EnabledFlag = 'Y'
-    <if test="loginname != null and loginname!='' ">
-      and su.loginname like
-      CONCAT('%',#{loginname,jdbcType=VARCHAR},'%')
+    and su.enabled_flag = 'Y'
+    <if test="loginName != null and loginName!='' ">
+      and su.login_name like
+      CONCAT('%',#{loginName,jdbcType=VARCHAR},'%')
     </if>
-    <if test="username != null and username!='' ">
-      AND su.username like
-      CONCAT('%',#{username,jdbcType=VARCHAR},'%')
+    <if test="userName != null and userName!='' ">
+      AND su.user_name like
+      CONCAT('%',#{userName,jdbcType=VARCHAR},'%')
     </if>
   </select>
 </mapper>
