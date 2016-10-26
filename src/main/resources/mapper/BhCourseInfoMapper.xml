@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bh.train.dao.BhCourseInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bh.train.model.BhCourseInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="class_type" property="classType" jdbcType="INTEGER" />
+    <result column="class_name" property="className" jdbcType="VARCHAR" />
+    <result column="class_hour" property="classHour" jdbcType="INTEGER" />
+    <result column="class_unit" property="classUnit" jdbcType="VARCHAR" />
+    <result column="charging_standard" property="chargingStandard" jdbcType="INTEGER" />
+    <result column="charging_unit" property="chargingUnit" jdbcType="VARCHAR" />
+    <result column="student_age" property="studentAge" jdbcType="VARCHAR" />
+    <result column="people_num" property="peopleNum" jdbcType="INTEGER" />
+    <result column="is_start" property="isStart" jdbcType="VARCHAR" />
+    <result column="off_line" property="offLine" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="enabled_flag" property="enabledFlag" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bh.train.model.BhCourseInfo" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, class_type, class_name, class_hour, class_unit, charging_standard, charging_unit, 
+    student_age, people_num, is_start, off_line, add_time, update_time, enabled_flag
+  </sql>
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bh_course_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bh_course_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bh.train.model.BhCourseInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bh_course_info (class_type, class_name, class_hour, 
+      class_unit, charging_standard, charging_unit, 
+      student_age, people_num, is_start, 
+      off_line, add_time, update_time, 
+      enabled_flag, description)
+    values (#{classType,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, #{classHour,jdbcType=INTEGER}, 
+      #{classUnit,jdbcType=VARCHAR}, #{chargingStandard,jdbcType=INTEGER}, #{chargingUnit,jdbcType=VARCHAR}, 
+      #{studentAge,jdbcType=VARCHAR}, #{peopleNum,jdbcType=INTEGER}, #{isStart,jdbcType=VARCHAR}, 
+      #{offLine,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{enabledFlag,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bh.train.model.BhCourseInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bh_course_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="classType != null" >
+        class_type,
+      </if>
+      <if test="className != null" >
+        class_name,
+      </if>
+      <if test="classHour != null" >
+        class_hour,
+      </if>
+      <if test="classUnit != null" >
+        class_unit,
+      </if>
+      <if test="chargingStandard != null" >
+        charging_standard,
+      </if>
+      <if test="chargingUnit != null" >
+        charging_unit,
+      </if>
+      <if test="studentAge != null" >
+        student_age,
+      </if>
+      <if test="peopleNum != null" >
+        people_num,
+      </if>
+      <if test="isStart != null" >
+        is_start,
+      </if>
+      <if test="offLine != null" >
+        off_line,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="enabledFlag != null" >
+        enabled_flag,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="classType != null" >
+        #{classType,jdbcType=INTEGER},
+      </if>
+      <if test="className != null" >
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="classHour != null" >
+        #{classHour,jdbcType=INTEGER},
+      </if>
+      <if test="classUnit != null" >
+        #{classUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="chargingStandard != null" >
+        #{chargingStandard,jdbcType=INTEGER},
+      </if>
+      <if test="chargingUnit != null" >
+        #{chargingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="studentAge != null" >
+        #{studentAge,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleNum != null" >
+        #{peopleNum,jdbcType=INTEGER},
+      </if>
+      <if test="isStart != null" >
+        #{isStart,jdbcType=VARCHAR},
+      </if>
+      <if test="offLine != null" >
+        #{offLine,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabledFlag != null" >
+        #{enabledFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bh.train.model.BhCourseInfo" >
+    update bh_course_info
+    <set >
+      <if test="classType != null" >
+        class_type = #{classType,jdbcType=INTEGER},
+      </if>
+      <if test="className != null" >
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="classHour != null" >
+        class_hour = #{classHour,jdbcType=INTEGER},
+      </if>
+      <if test="classUnit != null" >
+        class_unit = #{classUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="chargingStandard != null" >
+        charging_standard = #{chargingStandard,jdbcType=INTEGER},
+      </if>
+      <if test="chargingUnit != null" >
+        charging_unit = #{chargingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="studentAge != null" >
+        student_age = #{studentAge,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleNum != null" >
+        people_num = #{peopleNum,jdbcType=INTEGER},
+      </if>
+      <if test="isStart != null" >
+        is_start = #{isStart,jdbcType=VARCHAR},
+      </if>
+      <if test="offLine != null" >
+        off_line = #{offLine,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabledFlag != null" >
+        enabled_flag = #{enabledFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bh.train.model.BhCourseInfo" >
+    update bh_course_info
+    set class_type = #{classType,jdbcType=INTEGER},
+      class_name = #{className,jdbcType=VARCHAR},
+      class_hour = #{classHour,jdbcType=INTEGER},
+      class_unit = #{classUnit,jdbcType=VARCHAR},
+      charging_standard = #{chargingStandard,jdbcType=INTEGER},
+      charging_unit = #{chargingUnit,jdbcType=VARCHAR},
+      student_age = #{studentAge,jdbcType=VARCHAR},
+      people_num = #{peopleNum,jdbcType=INTEGER},
+      is_start = #{isStart,jdbcType=VARCHAR},
+      off_line = #{offLine,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      enabled_flag = #{enabledFlag,jdbcType=VARCHAR},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bh.train.model.BhCourseInfo" >
+    update bh_course_info
+    set class_type = #{classType,jdbcType=INTEGER},
+      class_name = #{className,jdbcType=VARCHAR},
+      class_hour = #{classHour,jdbcType=INTEGER},
+      class_unit = #{classUnit,jdbcType=VARCHAR},
+      charging_standard = #{chargingStandard,jdbcType=INTEGER},
+      charging_unit = #{chargingUnit,jdbcType=VARCHAR},
+      student_age = #{studentAge,jdbcType=VARCHAR},
+      people_num = #{peopleNum,jdbcType=INTEGER},
+      is_start = #{isStart,jdbcType=VARCHAR},
+      off_line = #{offLine,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      enabled_flag = #{enabledFlag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <!-- 模糊查询用户信息 分页查询 -->
+  <select id="selectPage" parameterType="com.bh.train.model.BhCourseInfo"
+          resultMap="BaseResultMap">
+    SELECT su.*
+    FROM bh_course_info su
+    WHERE su.enabled_flag = 'Y'
+    <if test="classType != null and classType!='' ">
+      AND su.class_type like
+      CONCAT('%',#{classType,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="className != null and className!='' ">
+      AND su.class_name = #{className,jdbcType=VARCHAR}
+    </if>
+    limit #{start},#{limit}
+  </select>
+  <!-- 根据模糊条件查询出总记录数 -->
+  <select id="selectCount" parameterType="com.bh.train.model.BhCourseInfo"
+          resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM bh_course_info su
+    WHERE su.enabled_flag = 'Y'
+    <if test="classType != null and classType!='' ">
+      AND su.class_type like
+      CONCAT('%',#{classType,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="className != null and className!='' ">
+      AND su.class_name = #{className,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+</mapper>

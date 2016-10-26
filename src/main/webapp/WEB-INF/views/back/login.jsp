@@ -4,10 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Central Authentication Service,JA-SIG,CAS" />
     <link rel="stylesheet" href="<c:url value='/static/css/home.css'/>" type="text/css" media="all" />
-    <link rel="stylesheet" href="<c:url value='/static/css/jasig.css'/>" type="text/css" media="all" />
     <script src="${ctx}/static/js/jquery-2.1.1.min.js"></script>
     <font class="titleFont"/>
     <title>博华后台管理系统</title>
