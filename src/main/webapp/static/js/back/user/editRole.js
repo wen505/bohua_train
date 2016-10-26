@@ -6,9 +6,9 @@ var editRole = {
 		init:function(){
 			var userId = commonUtil.getQueryString("userId");
 			$('#userId').val(userId);
-			var param={"userid":userId};
+			var param={"userId":userId};
 			$.post(commonUtil.getRealpath()+"/back/user/getUserRole.do",param,function(data){
-				var msg=data.date;
+				var msg=data.data;
 				commonUtil.initztree("treeDemo", msg, true, false, false, { "Y" : "ps", "N" : "ps" } );
 	         });
 		},

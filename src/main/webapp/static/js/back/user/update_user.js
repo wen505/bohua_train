@@ -31,7 +31,7 @@ var update_user={
         commonUtil.ajaxSubmit("back/user/update.do",$('#myForm').serialize(),function () {
             commonUtil.checkingshowmsg(false, "保存失败！", "", "", "errormsg");
         },function (date) {
-            commonUtil.showmsg(true,date.msg,"修改成功！",null,"errormsg","queryTable");
+            commonUtil.successoperate("queryTable");
         });
 
     }
