@@ -514,55 +514,16 @@ var commonUtil = {
 			return true;
 		}
 	},
-	/**
-	 * 根据返回的消息 进行相关操作
-	 * 
-	 * @param issuccess
-	 *            是否成功
-	 * @param errormsg
-	 *            显示错误提示消息
-	 * @param successmsg
-	 *            成功提示消息
-	 * @param focusID
-	 *            重新获取焦点的ID
-	 * @param showMsgId
-	 *            显示错误的id
+	/**操作成功操作
 	 * @param parentid
-	 *            父类窗口的 表单id
-	 * @returns
-	 */
-	showmsg : function(issuccess, errormsg, successmsg, focusID, showMsgId,
-			parentid) {
-		if (issuccess == false) {
-			if (errormsg == undefined || errormsg == null) {
-				errormsg = "操作失败！";
-			}
-			$('#' + showMsgId)
-					.html("<font color='red'>" + errormsg + "</font>");
-			if(focusID!=null){
-				$('#' + focusID).val('');
-				$('#' + focusID).focus();
-			}
-			return false;
-		} else if (issuccess == true) {
-			if (parentid != null) {
-				commonUtil.getParentWindows().commonUtil.reloadtable(parentid);
-			}
-			commonUtil.closedialog();
-			return true;
-		} else {
-			if (errormsg == undefined || errormsg == null) {
-				errormsg = "操作失败！";
-			}
-			$('#' + showMsgId)
-					.html("<font color='red'>" + errormsg + "</font>");
-			if (focusID != null) {
-				$('#' + focusID).val('');
-				$('#' + focusID).focus();
-			}
-
-			return false;
+	 * @returns {boolean}
+     */
+	successoperate : function(parentid) {
+		if (parentid != null) {
+			commonUtil.getParentWindows().commonUtil.reloadtable(parentid);
 		}
+		commonUtil.closedialog();
+		return true;
 
 	},
 
