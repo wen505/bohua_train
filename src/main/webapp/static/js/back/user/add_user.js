@@ -25,8 +25,7 @@ var add_user={
      */
     checkLoginName : function() {
         var loginName = $("#loginName").val();
-        if (loginName == null || loginName == "") {
-            commonUtil.checkingshowmsg(false, "请输入登录名！", "", "loginName", "errormsg");
+        if (!commonUtil.checkinfo('errormsg',null,'loginName','请输入登录名',false)) {
             return false;
         }
         commonUtil.ajaxSubmit("back/user/isLoginName.do", {"loginName": loginName}, function () {
