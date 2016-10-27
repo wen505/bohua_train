@@ -125,4 +125,18 @@
       enabled_flag = #{enabledFlag,jdbcType=VARCHAR}
     where line_id = #{lineId,jdbcType=INTEGER}
   </update>
+
+  <update id="deleteDictionaryLines" parameterType="java.util.Map">
+    UPDATE bh_dictionary_line
+    <set>
+      <if test="flag != null and flag != ''">
+        enabled_flag = #{flag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where header_code in
+    <foreach collection="headerCodes" item="headerCodes" index="index" open="(" separator="," close=")">
+      #{headerCodes}
+    </foreach>
+  </update>
+
 </mapper>

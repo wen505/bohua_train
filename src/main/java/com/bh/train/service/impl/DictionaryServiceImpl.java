@@ -1,13 +1,18 @@
 package com.bh.train.service.impl;
 
+import com.bh.train.common.Constant;
+import com.bh.train.common.exception.BusinessException;
 import com.bh.train.common.service.BaseService;
 import com.bh.train.common.util.PageController;
 import com.bh.train.dao.BhDictionaryHeaderMapper;
+import com.bh.train.dao.BhDictionaryLineMapper;
 import com.bh.train.model.BhDictionaryHeader;
 import com.bh.train.service.DictionaryService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -18,6 +23,9 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
 
     @Resource
     private BhDictionaryHeaderMapper bhDictionaryHeaderMapper;
+
+    @Resource
+    private BhDictionaryLineMapper bhDictionaryLineMapper;
 
     @Override
     public PageController<BhDictionaryHeader> find(BhDictionaryHeader bhDictionaryHeader, String page, String rows) {
@@ -31,5 +39,39 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
         int totalCount = bhDictionaryHeaderMapper.selectCount(bhDictionaryHeader);
         PageController<BhDictionaryHeader> controller  =new PageController<BhDictionaryHeader>(bhDictionaryHeaderList, totalCount);
         return  controller;
+    }
+
+    @Override
+    public int addDictionaryHeader(BhDictionaryHeader bhDictionaryHeader) {
+        return bhDictionaryHeaderMapper.insertSelective(bhDictionaryHeader);
+    }
+
+    @Override
+    public int updateDictionaryHeader(BhDictionaryHeader bhDictionaryHeader) {
+        return bhDictionaryHeaderMapper.updateByPrimaryKeySelective(bhDictionaryHeader);
+    }
+
+    @Override
+    public int deleteDictionaryHeaders(List<String> headerCodes){
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("updateTime", new Date());
+        map.put("flag", Constant.UN_ENABLE_FLAG);
+        map.put("headerCodes", headerCodes);
+        int res = bhDictionaryHeaderMapper.deleteDictionarys(map);
+        if (res != 1) {
+            throw new BusinessException("删除字典配置异常", Constant.BUSSINESS_ERROR_CODE);
+        }else {
+            res = bhDictionaryLineMapper.deleteDictionaryLines(map);
+            if (res != 1) {
+                throw new BusinessException("删除字典配置异常", Constant.BUSSINESS_ERROR_CODE);
+            }
+        }
+        return res;
+    }
+
+    @Override
+    public BhDictionaryHeader checkHeaderCode(String headerCode) {
+        BhDictionaryHeader bhDictionaryHeader = bhDictionaryHeaderMapper.selectByPrimaryKey(headerCode);
+        return bhDictionaryHeader;
     }
 }
