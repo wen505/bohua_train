@@ -1,9 +1,18 @@
 package com.bh.train.model;
 
+import com.bh.train.common.model.BaseModel;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class BhPermission {
-    private Integer prmissionId;
+/**
+ * 权限
+ */
+public class BhPermission extends BaseModel implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private Integer permissionId;
 
     private String permissionName;
 
@@ -12,6 +21,8 @@ public class BhPermission {
     private String description;
 
     private Integer parentId;
+
+    private String parentName;
 
     private Integer permissionSn;
 
@@ -29,13 +40,8 @@ public class BhPermission {
 
     private  String isBindRole;
 
-    public Integer getPrmissionId() {
-        return prmissionId;
-    }
+    private String permissionRank;
 
-    public void setPrmissionId(Integer prmissionId) {
-        this.prmissionId = prmissionId;
-    }
 
     public String getPermissionName() {
         return permissionName;
@@ -131,5 +137,31 @@ public class BhPermission {
 
     public void setIsBindRole(String isBindRole) {
         this.isBindRole = isBindRole;
+    }
+
+    public Integer getPermissionId() {
+        return permissionId;
+    }
+
+    public void setPermissionId(Integer permissionId) {
+        this.permissionId = permissionId;
+    }
+
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
+
+
+    public String getPermissionRank() {
+        return permissionRank;
+    }
+
+    public void setPermissionRank(String permissionRank) {
+        this.permissionRank = permissionRank;
     }
 }

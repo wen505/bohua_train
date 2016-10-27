@@ -118,10 +118,10 @@ public class RoleServiceImpl extends BaseService implements RoleSerice{
             List<BhPermission> bhPermissions = bhPermissionMapper.selectPermissionRelevancyRole(roId);
             for (BhPermission bhPermission : bhPermissions) {
                 if (StringUtils.isEmpty(bhPermission.getIsBindRole())){
-                    CheckTreeNode check = new CheckTreeNode(bhPermission.getPrmissionId()+"", bhPermission.getParentId()+"" , bhPermission.getPermissionName(), false);
+                    CheckTreeNode check = new CheckTreeNode(bhPermission.getPermissionId()+"", bhPermission.getParentId()+"" , bhPermission.getPermissionName(), false);
                     treelist.add(check);
                 }else{
-                    CheckTreeNode check = new CheckTreeNode(bhPermission.getPrmissionId()+"", bhPermission.getParentId()+"" , bhPermission.getPermissionName(), true);
+                    CheckTreeNode check = new CheckTreeNode(bhPermission.getPermissionId()+"", bhPermission.getParentId()+"" , bhPermission.getPermissionName(), true);
                     treelist.add(check);
                 }
 

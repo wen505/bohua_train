@@ -17,8 +17,7 @@ var update_user={
     /**
      * 修改用户信息
      * @returns {Boolean}
-     */
-    update : function(){
+     */    update : function(){
         if(!commonUtil.checkinfo('errormsg',null,'loginName','请输入登录名',false)){
             return false;
         }else if(!commonUtil.checkinfo('errormsg',null,'userName','请输入姓名',false)){

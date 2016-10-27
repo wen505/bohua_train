@@ -9,6 +9,18 @@
                 "menuname": "出单量统计",
                 "icon": "icon-nav",
                 "url": "/view/back/user/userManager.jsp?linkName=reportInfoPage"
+            },
+            {
+                "menuid": "202",
+                "menuname": "角色管理",
+                "icon": "icon-nav",
+                "url": "/view/back/role/roleManager.jsp?linkName=reportInfoPage"
+            },
+            {
+                "menuid": "202",
+                "menuname": "权限管理",
+                "icon": "icon-nav",
+                "url": "/view/back/permission/permissionManager.jsp?linkName=reportInfoPage"
             }
         ]
     },

@@ -7,6 +7,9 @@ var add_user={
     add : function(){
         if(!commonUtil.checkinfo('errormsg',null,'loginName','请输入登录名',false)){
             return false;
+        }else if(hanzireg.test($("#loginName").val())){
+            commonUtil.checkingshowmsg(false, "不支持汉字输入", "", "loginName", "errormsg");
+            return false;
         }else if(!commonUtil.checkinfo('errormsg',null,'userName','请输入姓名',false)){
             return false;
         }else if(!commonUtil.checkinfo('errormsg',mobilephonereg,'telephone','请输入电话',false)){
@@ -26,6 +29,7 @@ var add_user={
     checkLoginName : function() {
         var loginName = $("#loginName").val();
         if (!commonUtil.checkinfo('errormsg',null,'loginName','请输入登录名',false)) {
+            commonUtil.checkingshowmsg(false, "请输入登录名！", "", "loginName", "errormsg");
             return false;
         }
         commonUtil.ajaxSubmit("back/user/isLoginName.do", {"loginName": loginName}, function () {

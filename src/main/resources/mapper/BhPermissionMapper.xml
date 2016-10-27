@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bh.train.dao.BhPermissionMapper" >
   <resultMap id="BaseResultMap" type="com.bh.train.model.BhPermission" >
-    <id column="prmission_id" property="prmissionId" jdbcType="INTEGER" />
+    <id column="permission_id" property="permissionId" jdbcType="INTEGER" />
     <result column="permission_name" property="permissionName" jdbcType="VARCHAR" />
     <result column="permission_code" property="permissionCode" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
@@ -16,34 +16,34 @@
     <result column="enabled_flag" property="enabledFlag" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    prmission_id, permission_name, permission_code, description, parent_id, permission_sn, 
+    permission_id, permission_name, permission_code, description, parent_id, permission_sn, 
     url, permission_type, memo, add_time, update_time, enabled_flag
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from bh_permission
-    where prmission_id = #{prmissionId,jdbcType=INTEGER}
+    where permission_id = #{permissionId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from bh_permission
-    where prmission_id = #{prmissionId,jdbcType=INTEGER}
+    where permission_id = #{permissionId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.bh.train.model.BhPermission" >
-    <selectKey resultType="java.lang.Integer" keyProperty="prmissionId" order="AFTER" >
+    <selectKey resultType="java.lang.Integer" keyProperty="permissionId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into bh_permission (permission_name, permission_code, description, 
-      parent_id, permission_sn, url, 
+    insert into bh_permission (permission_name, permission_code, description,
+      parent_id, permission_sn, url,
       permission_type, memo, add_time, 
       update_time, enabled_flag)
-    values (#{permissionName,jdbcType=VARCHAR}, #{permissionCode,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+    values (#{permissionName,jdbcType=VARCHAR}, #{permissionCode,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
       #{parentId,jdbcType=INTEGER}, #{permissionSn,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, 
-      #{permissionType,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, 
+      #{permissionType,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP},
       #{updateTime,jdbcType=TIMESTAMP}, #{enabledFlag,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.bh.train.model.BhPermission" >
-    <selectKey resultType="java.lang.Integer" keyProperty="prmissionId" order="AFTER" >
+    <selectKey resultType="java.lang.Integer" keyProperty="permissionId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into bh_permission
@@ -155,28 +155,122 @@
         enabled_flag = #{enabledFlag,jdbcType=VARCHAR},
       </if>
     </set>
-    where prmission_id = #{prmissionId,jdbcType=INTEGER}
+    where permission_id = #{permissionId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bh.train.model.BhPermission" >
     update bh_permission
     set permission_name = #{permissionName,jdbcType=VARCHAR},
       permission_code = #{permissionCode,jdbcType=VARCHAR},
-      descriptPerion = #{description,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
       parent_id = #{parentId,jdbcType=INTEGER},
       permission_sn = #{permissionSn,jdbcType=INTEGER},
       url = #{url,jdbcType=VARCHAR},
       permission_type = #{permissionType,jdbcType=VARCHAR},
       memo = #{memo,jdbcType=VARCHAR},
-      add_time = #{addTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      enabled_flag = #{enabledFlag,jdbcType=VARCHAR}
-    where prmission_id = #{prmissionId,jdbcType=INTEGER}
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where permission_id = #{permissionId,jdbcType=INTEGER}
   </update>
   <!--查询权限以及绑定的角色-->
   <select id="selectPermissionRelevancyRole"
           parameterType="java.lang.Integer" resultMap="BaseResultMap">
     SELECT  p.*,r.role_name AS isBindRole FROM bh_permission p
-    LEFT JOIN bh_role_permission  pr  ON p.prmission_id= pr.permission_id
+    LEFT JOIN bh_role_permission  pr  ON p.permission_id= pr.permission_id
     LEFT JOIN (SELECT *  FROM  bh_role WHERE role_id =#{roleId,jdbcType=INTEGER})r ON pr.role_id = r.role_id
+  </select>
+
+  <!-- 根据权限编码查询权限 -->
+  <select id="selectPermissionBypermissionCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from bh_permission sp
+    where  enabled_flag = 'Y'
+    and sp.permission_code =  #{permissionCode,jdbcType=VARCHAR}
+  </select>
+  <!-- 根据多个父类id查询权限 -->
+  <select id="selectPermissionByParentIDs" parameterType="java.util.List" resultMap="BaseResultMap">
+    select sp.*  from bh_permission sp
+    INNER JOIN bh_permission ps ON sp.parent_id = ps.permission_id
+    where sp.enabled_flag = 'Y'
+    AND ps.permission_id IN
+    <foreach close=")" collection="list" item="item" open="("
+             separator=",">
+      #{item.permissionId,jdbcType=INTEGER}
+    </foreach>
+  </select>
+  <!-- 批量修改权限信息的可用状态 -->
+  <update id="updatBatchPermissionEnabledFlag" parameterType="java.util.List">
+    UPDATE bh_permission
+    set enabled_flag = 'N'
+    WHERE permission_id IN
+    <foreach close=")" collection="list" item="item" open="("
+             separator=",">
+      #{item.permissionId,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <!--根据多个权限ID删除权限角色表-->
+  <delete id="deleteRolePermissionByPermissionIds" parameterType="java.util.List" >
+    DELETE FROM  bh_role_permission
+    WHERE permission_id IN
+    <foreach close=")" collection="list" item="item" open="("
+             separator=",">
+      #{item.permissionId,jdbcType=INTEGER}
+    </foreach>
+  </delete>
+
+
+  <!-- 分页查询权限-->
+  <select id="selectPagePermission" parameterType="com.bh.train.model.BhPermission" resultMap="BaseResultMap">
+    select sp.* ,ps.permission_name AS parentName  from bh_permission sp
+    LEFT JOIN bh_permission ps ON sp.permission_id = ps.parent_id
+    where sp.enabled_flag = 'Y'
+    <if test="permissionName!=null and permissionName!=''" >
+      and sp.permission_name like CONCAT('%', #{permissionName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="permissionType!=null and permissionType!=''" >
+      and sp.permission_type = #{permissionType,jdbcType=VARCHAR}
+    </if>
+    <if test="permissionId!=null" >
+      and sp.permission_id = #{permissionId,jdbcType=INTEGER}
+    </if>
+    <if test="parentId!=null">
+      and  sp.parent_id = #{parentId,jdbcType=INTEGER}
+    </if>
+    order by permission_sn
+    limit #{start},#{limit}
+  </select>
+  <!-- 查询权限记录数-->
+  <select id="selectPermissionCount" parameterType="com.bh.train.model.BhPermission" resultType="java.lang.Integer" >
+    select count(1) from bh_permission sp
+    where sp.enabled_flag = 'Y'
+    <if test="permissionName!=null and permissionName!=''" >
+      and sp.permission_name like CONCAT('%', #{permissionName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="permissionType!=null and permissionType!=''" >
+      and sp.permission_type = #{permissionType,jdbcType=VARCHAR}
+    </if>
+    <if test="permissionId!=null" >
+      and sp.permission_id = #{permissionId,jdbcType=INTEGER}
+    </if>
+    <if test="parentId!=null">
+      and  sp.parent_id = #{parentId,jdbcType=INTEGER}
+    </if>
+  </select>
+
+
+  <!-- 条件查询查询所有的权限 -->
+  <select id="selectAllPermission" parameterType="com.bh.train.model.BhPermission" resultMap="BaseResultMap">
+    select sp.* from bh_permission sp
+    where sp.enabled_flag = 'Y'
+    <if test="permissionName!=null and permissionName!=''" >
+      and sp.permission_name like CONCAT('%', #{permissionName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="permissionType!=null and permissionType!=''" >
+      and sp.permission_type = #{permissionType,jdbcType=VARCHAR}
+    </if>
+    <if test="permissionId!=null" >
+      and sp.permission_id = #{permissionId,jdbcType=INTEGER}
+    </if>
+    <if test="parentId!=null">
+      and  sp.parent_id = #{parentId,jdbcType=INTEGER}
+    </if>
+    order by permission_sn
   </select>
 </mapper>

@@ -78,7 +78,7 @@ var commonUtil = {
 							nowrap : false,
 							fit : true,// 自动大小(设置为true时 当最大化窗口也会跟着放大)
 							striped : true,// True 就把行条纹化。（即奇偶行使用不同背景色）
-							url :  commonUtil.getRealpath()+"/"+url,
+							url :  (url==''||url==null) ? null :commonUtil.getRealpath()+"/"+url,
 							remoteSort : false,
 							queryParams : param,
 							idField : keyid,
@@ -572,8 +572,9 @@ var commonUtil = {
 	 * @param url  请求地址
 	 * @param tableid dategrid表单id
 	 * @param customerArray 提交的数据
-	 */
-	deleteOperate : function(errormsg,url,tableid,pushArrayFuc){
+	 * @param successCallBack 成功回调
+     */
+	deleteOperate : function(errormsg,url,tableid,pushArrayFuc,successCallBack,confirmMsg){
 		var rows = commonUtil.getChecked(tableid);
 		if (rows == null || rows.length < 1) {
 			commonUtil.showMessages(errormsg, "提示");
@@ -583,8 +584,11 @@ var commonUtil = {
 		if(pushArrayFuc!=null){
 			pushArrayFuc(rows,customerArray);
 		}
-		
-		$.messager.confirm("操作提示","确认要删除？",function(re){
+		if(confirmMsg==null||confirmMsg==''){
+			confirmMsg="确认要删除？"
+		}
+
+		$.messager.confirm("操作提示",confirmMsg,function(re){
 			if(!re){
 				return false;
 			}else{
@@ -596,8 +600,10 @@ var commonUtil = {
 					data : JSON.stringify(customerArray), // 将Json对象序列化成Json字符串，JSON.stringify()原生态方法
 					success : function(data) {
 						if (data.code=='1') {
+							if(successCallBack!=null){
+								successCallBack(rows);
+							}
 							commonUtil.reloadtable(tableid);
-
 						} else {
 							commonUtil.showMessages("删除失败！", '提示');
 						}
