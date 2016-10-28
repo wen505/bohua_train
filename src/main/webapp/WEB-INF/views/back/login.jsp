@@ -18,7 +18,8 @@
         </tr>
 
         <tr>
-            <td class="bg"><table width="669" border="0" cellspacing="0" cellpadding="0">
+            <td class="bg" >
+                <table width="669" border="0" cellspacing="0" cellpadding="0" style="margin: auto;">
                 <tr>
                     <td height="55">　　<img src="${ctx}/static/img/login/imglogonlogo.gif" ></td>
                 </tr>
@@ -30,7 +31,7 @@
                         </tr>
                         <tr>
                             <td height="35"><span class="username">
-                            <input class="input_w w_22" type="text"  maxlength="25" name="password" id="password" tabindex="2"/>
+                            <input class="input_w w_22" type="password"  maxlength="25" name="password" id="password" tabindex="2"/>
                             </span> </td>
                         </tr>
                     </table>
@@ -58,7 +59,7 @@
         queryParam = eval("("+queryParam+")");
         $.ajax({
             type: "POST",
-            url: "login",
+            url: contextRootPath+"/back/login.do",
             data: queryParam,
             dataType : "json",
             success: function(result){
