@@ -12,8 +12,8 @@ var dictionaryManager = {
     //查询
     selectClick : function(){
         $('#queryTable').datagrid('load' ,{
-            'loginName' : $('#headerName').val(),
-            'userName' : $('#headerCode').val(),
+            'headerName' : $('#headerName').val(),
+            'headerCode' : $('#headerCode').val(),
             'dictionaryType' : $('#dictionaryType').val()
         });
     },
@@ -49,6 +49,15 @@ var dictionaryManager = {
         else if(value == 'system'){
             return '系统';
         }
+    },
+
+    editClickEvent : function () {
+        var rows = commonUtil.getChecked('queryTable');
+        if (rows == null || rows.length != 1) {
+            commonUtil.showMessages('请选择一行配置', "提示");
+            return;
+        }
+        commonUtil.openWin("view/back/dictionary/dictionaryDetail.jsp","dictionaryDetail","修改字典",800,400);
     }
 
 };

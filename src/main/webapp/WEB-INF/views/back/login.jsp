@@ -62,6 +62,7 @@
             url: contextRootPath+"/back/login.do",
             data: queryParam,
             dataType : "json",
+            async : true,
             success: function(result){
                 var code = result.code;
                 if (code == '1') {

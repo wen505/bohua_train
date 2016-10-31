@@ -2,6 +2,7 @@ package com.bh.train.service;
 
 import com.bh.train.common.util.PageController;
 import com.bh.train.model.BhDictionaryHeader;
+import com.bh.train.model.BhDictionaryLine;
 import com.bh.train.model.BhUser;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface DictionaryService {
     public int updateDictionaryHeader(BhDictionaryHeader bhDictionaryHeader);
 
     public int deleteDictionaryHeaders(List<String> headerCodes);
+
+    public List<BhDictionaryLine> queryDetailByHeaderCode(String headerCode);
 }

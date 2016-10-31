@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bh.train.model.BhDictionaryHeader;
+import com.bh.train.model.BhDictionaryLine;
 import com.bh.train.model.BhUser;
 import com.bh.train.service.DictionaryService;
 import com.bh.train.vo.SelectVo;
@@ -21,6 +22,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
@@ -173,6 +175,18 @@ public class DictionaryController extends BaseController<DictionaryController> {
             rspData = RspData.error(Constant.SYSTEM_ERROR_CODE, "系统异常！");
         }
         return rspData;
+    }
+
+    @RequestMapping("/findDictionaryByHeaderCode")
+    @ResponseBody
+    public List<BhDictionaryLine> findDictionaryByHeaderCode(@RequestParam(value = "headerCode") String headerCode) {
+        List<BhDictionaryLine> bhDictionaryLineList = new ArrayList<BhDictionaryLine>();
+        try {
+            bhDictionaryLineList = dictionaryService.queryDetailByHeaderCode(headerCode);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+        return bhDictionaryLineList;
     }
 
 }

@@ -12,7 +12,7 @@
   </head>
   
   <body style='margin: 0px;padding: 0px;'>
-		<table id="queryTable" width="100%" border="1" cellpadding="0" cellspacing="0" class="" data-options="onClickRow: dictionaryManager.onClickRow">
+		<table id="queryTable" width="100%" border="1" cellpadding="0" cellspacing="0" class="">
 			<thead>
 				<tr>
 					<th data-options="field:'id',align:'center',checkbox:true" scope="col" width="10%"></th>
@@ -39,7 +39,7 @@
 			</tr>
 		</table>
 		<div style='' align="right">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-add" id="showDictionaryDetail"  style="display: none;"  onclick="dictionaryManager.addClickEvent()"  plain="true" title="编辑行配置">编辑行配置</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-add" id="showDictionaryDetail"  style="display: none;"  onclick="dictionaryManager.editClickEvent()"  plain="true" title="编辑行配置">编辑行配置</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-edit" id="addDictionary"  style="display: none;"  onclick="dictionaryManager.addClickEvent()"  plain="true" title="添加配置">添加配置</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-edit" id="updateDictionary"  style="display: none;" onclick="dictionaryManager.updateClickEvent()"  plain="true" title="修改配置">修改配置</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" id="deleteDictionary"   style="display: none;"  onclick="dictionaryManager.delet()"  plain="true" title="删除配置">删除配置</a>

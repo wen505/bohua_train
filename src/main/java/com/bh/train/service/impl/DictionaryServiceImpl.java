@@ -7,6 +7,7 @@ import com.bh.train.common.util.PageController;
 import com.bh.train.dao.BhDictionaryHeaderMapper;
 import com.bh.train.dao.BhDictionaryLineMapper;
 import com.bh.train.model.BhDictionaryHeader;
+import com.bh.train.model.BhDictionaryLine;
 import com.bh.train.service.DictionaryService;
 import org.springframework.stereotype.Service;
 
@@ -73,5 +74,10 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
     public BhDictionaryHeader checkHeaderCode(String headerCode) {
         BhDictionaryHeader bhDictionaryHeader = bhDictionaryHeaderMapper.selectByPrimaryKey(headerCode);
         return bhDictionaryHeader;
+    }
+
+    @Override
+    public List<BhDictionaryLine> queryDetailByHeaderCode(String headerCode) {
+        return bhDictionaryLineMapper.selectByHeaderCode(headerCode);
     }
 }

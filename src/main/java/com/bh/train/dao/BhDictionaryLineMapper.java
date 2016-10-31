@@ -2,6 +2,7 @@ package com.bh.train.dao;
 
 import com.bh.train.model.BhDictionaryLine;
 
+import java.util.List;
 import java.util.Map;
 
 public interface BhDictionaryLineMapper {
@@ -18,4 +19,6 @@ public interface BhDictionaryLineMapper {
     int updateByPrimaryKey(BhDictionaryLine record);
 
     int deleteDictionaryLines(Map<String, Object> map);
+
+    List<BhDictionaryLine> selectByHeaderCode(String headerCode);
 }

@@ -139,4 +139,11 @@
     </foreach>
   </update>
 
+  <select id="selectByHeaderCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from bh_dictionary_line
+    where header_code = #{headerCode,jdbcType=VARCHAR}
+  </select>
+
 </mapper>
