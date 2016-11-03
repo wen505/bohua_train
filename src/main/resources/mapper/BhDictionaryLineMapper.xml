@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.bh.train.model.BhDictionaryLine" >
     <id column="line_id" property="lineId" jdbcType="INTEGER" />
     <result column="header_code" property="headerCode" jdbcType="VARCHAR" />
-    <result column="value" property="value" jdbcType="VARCHAR" />
+    <result column="line_code" property="lineCode" jdbcType="VARCHAR" />
     <result column="sn" property="sn" jdbcType="INTEGER" />
     <result column="line_name" property="lineName" jdbcType="VARCHAR" />
     <result column="is_default" property="isDefault" jdbcType="VARCHAR" />
@@ -12,7 +12,7 @@
     <result column="enabled_flag" property="enabledFlag" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    line_id, header_code, value, sn, line_name, is_default, memo, enabled_flag
+    line_id, header_code, line_code, sn, line_name, is_default, memo, enabled_flag
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -28,10 +28,10 @@
     <selectKey resultType="java.lang.Integer" keyProperty="lineId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into bh_dictionary_line (header_code, value, sn, 
+    insert into bh_dictionary_line (header_code, line_code, sn, 
       line_name, is_default, memo, 
       enabled_flag)
-    values (#{headerCode,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, #{sn,jdbcType=INTEGER}, 
+    values (#{headerCode,jdbcType=VARCHAR}, #{lineCode,jdbcType=VARCHAR}, #{sn,jdbcType=INTEGER}, 
       #{lineName,jdbcType=VARCHAR}, #{isDefault,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, 
       #{enabledFlag,jdbcType=VARCHAR})
   </insert>
@@ -44,8 +44,8 @@
       <if test="headerCode != null" >
         header_code,
       </if>
-      <if test="value != null" >
-        value,
+      <if test="lineCode != null" >
+        line_code,
       </if>
       <if test="sn != null" >
         sn,
@@ -67,8 +67,8 @@
       <if test="headerCode != null" >
         #{headerCode,jdbcType=VARCHAR},
       </if>
-      <if test="value != null" >
-        #{value,jdbcType=VARCHAR},
+      <if test="lineCode != null" >
+        #{lineCode,jdbcType=VARCHAR},
       </if>
       <if test="sn != null" >
         #{sn,jdbcType=INTEGER},
@@ -93,8 +93,8 @@
       <if test="headerCode != null" >
         header_code = #{headerCode,jdbcType=VARCHAR},
       </if>
-      <if test="value != null" >
-        value = #{value,jdbcType=VARCHAR},
+      <if test="lineCode != null" >
+        line_code = #{lineCode,jdbcType=VARCHAR},
       </if>
       <if test="sn != null" >
         sn = #{sn,jdbcType=INTEGER},
@@ -117,7 +117,7 @@
   <update id="updateByPrimaryKey" parameterType="com.bh.train.model.BhDictionaryLine" >
     update bh_dictionary_line
     set header_code = #{headerCode,jdbcType=VARCHAR},
-      value = #{value,jdbcType=VARCHAR},
+      line_code = #{lineCode,jdbcType=VARCHAR},
       sn = #{sn,jdbcType=INTEGER},
       line_name = #{lineName,jdbcType=VARCHAR},
       is_default = #{isDefault,jdbcType=VARCHAR},
@@ -146,4 +146,19 @@
     where header_code = #{headerCode,jdbcType=VARCHAR}
   </select>
 
+  <select id="selectByLine" resultMap="BaseResultMap" parameterType="com.bh.train.model.BhDictionaryLine" >
+    select
+    <include refid="Base_Column_List" />
+    from bh_dictionary_line
+    where 1=1
+    <if test="headerCode != null and headerCode != ''" >
+      and header_code = #{headerCode,jdbcType=VARCHAR}
+    </if>
+    <if test="lineCode != null and lineCode != ''" >
+      and line_code = #{lineCode,jdbcType=VARCHAR}
+    </if>
+    <if test="enabledFlag != null and enabledFlag != ''" >
+      and enabled_flag = #{enabledFlag,jdbcType=VARCHAR}
+    </if>
+  </select>
 </mapper>

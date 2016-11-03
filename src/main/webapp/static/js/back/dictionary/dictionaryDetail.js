@@ -7,11 +7,11 @@ var dictionaryDetail = {
         
     },
     typeFormatter : function (value,row,index) {
-        if(value == 'user'){
-            return '自定义';
+        if(value == 'Y'){
+            return '是';
         }
-        else if(value == 'system'){
-            return '系统';
+        else if(value == 'N'){
+            return '否';
         }
     }
 };
@@ -118,6 +118,13 @@ $(function () {
         onAfterEdit: function (rowIndex, rowData, changes) {
             //endEdit该方法触发此事件
             console.info(rowData);
+            rowData.headerCode = row.headerCode;
+            console.log(JSON.stringify(rowData));
+            commonUtil.ajaxSubmit("back/dictionary/addOrEditDictionaryDetail",JSON.stringify(rowData),function () {
+                commonUtil.checkingshowmsg(false, "保存失败！", "", "", "errormsg");
+            },function (data) {
+                commonUtil.successoperate("queryTable");
+            });
             editRow = undefined;
         },
         onDblClickRow: function (rowIndex, rowData) {

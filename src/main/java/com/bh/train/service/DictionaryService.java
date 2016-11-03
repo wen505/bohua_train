@@ -23,4 +23,6 @@ public interface DictionaryService {
     public int deleteDictionaryHeaders(List<String> headerCodes);
 
     public List<BhDictionaryLine> queryDetailByHeaderCode(String headerCode);
+
+    public int saveOrUpdate(BhDictionaryLine bhDictionaryLine);
 }

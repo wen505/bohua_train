@@ -15,18 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bh.train.model.BhDictionaryHeader;
 import com.bh.train.model.BhDictionaryLine;
-import com.bh.train.model.BhUser;
 import com.bh.train.service.DictionaryService;
 import com.bh.train.vo.SelectVo;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
 
 @Controller
@@ -188,5 +183,26 @@ public class DictionaryController extends BaseController<DictionaryController> {
         }
         return bhDictionaryLineList;
     }
+
+    @RequestMapping("/addOrEditDictionaryDetail")
+    @ResponseBody
+    public RspData addOrEditDictionaryDetail(@RequestBody BhDictionaryLine bhDictionaryLine) throws IOException {
+        RspData rspData = null;
+        try {
+            int res = dictionaryService.saveOrUpdate(bhDictionaryLine);
+            if (res == 1) {
+                rspData = RspData.success(null);
+            } else {
+                logger.error("修改行配置数据库异常！");
+                rspData = RspData.error(Constant.BUSSINESS_ERROR_CODE, "删除字典配置数据库异常！");
+            }
+        } catch (Exception e) {
+            logger.error("系统异常！", e);
+            rspData = RspData.error(Constant.SYSTEM_ERROR_CODE, "系统异常！");
+        }
+        return rspData;
+    }
+
+
 
 }

@@ -80,4 +80,16 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
     public List<BhDictionaryLine> queryDetailByHeaderCode(String headerCode) {
         return bhDictionaryLineMapper.selectByHeaderCode(headerCode);
     }
+
+    public int saveOrUpdate(BhDictionaryLine bhDictionaryLine) {
+        BhDictionaryLine dictionaryLine = bhDictionaryLineMapper.selectByLine(bhDictionaryLine);
+        int res = 0;
+        if (dictionaryLine != null) {//更新
+            bhDictionaryLine.setLineId(dictionaryLine.getLineId());
+            res = bhDictionaryLineMapper.updateByPrimaryKeySelective(bhDictionaryLine);
+        } else {//新增
+            res = bhDictionaryLineMapper.insertSelective(bhDictionaryLine);
+        }
+        return res;
+    }
 }
