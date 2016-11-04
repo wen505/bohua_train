@@ -70,7 +70,25 @@ $(function () {
                             }
                             //将选择到的行存入数组并用,分隔转换成字符串，
                             //本例只是前台操作没有与数据库进行交互所以此处只是弹出要传入后台的id
-                            alert(ids.join(','));
+                            alert(ids.toString());
+                            $.ajax({
+                                url : commonUtil.getRealpath()+"/"+"back/dictionary/deleteDictionaryDetail",
+                                type : "POST",
+                                dataType : "text",
+                                data : ids.toString(),
+                                contentType : "application/json;charset=utf-8",
+                                success : function(data) {
+                                    if (data.code=='1') {
+                                        commonUtil.successoperate("queryTable");
+                                    } else {
+                                        commonUtil.checkingshowmsg(false, "保存失败！", "", "", "errormsg");
+                                    }
+
+                                },
+                                error : function(res) {
+                                    commonUtil.checkingshowmsg(false, "保存失败！", "", "", "errormsg");
+                                }
+                            });
                         }
                     });
                 }
@@ -120,11 +138,26 @@ $(function () {
             console.info(rowData);
             rowData.headerCode = row.headerCode;
             console.log(JSON.stringify(rowData));
-            commonUtil.ajaxSubmit("back/dictionary/addOrEditDictionaryDetail",JSON.stringify(rowData),function () {
-                commonUtil.checkingshowmsg(false, "保存失败！", "", "", "errormsg");
-            },function (data) {
-                commonUtil.successoperate("queryTable");
+
+            $.ajax({
+                url : commonUtil.getRealpath()+"/"+"back/dictionary/addOrEditDictionaryDetail",
+                type : "POST",
+                dataType : "json",
+                data : params,
+                contentType : "application/json",
+                success : function(data) {
+                    if (data.code=='1') {
+                        commonUtil.successoperate("queryTable");
+                    } else {
+                        commonUtil.checkingshowmsg(false, "保存失败！", "", "", "errormsg");
+                    }
+
+                },
+                error : function(res) {
+                    commonUtil.checkingshowmsg(false, "保存失败！", "", "", "errormsg");
+                }
             });
+
             editRow = undefined;
         },
         onDblClickRow: function (rowIndex, rowData) {

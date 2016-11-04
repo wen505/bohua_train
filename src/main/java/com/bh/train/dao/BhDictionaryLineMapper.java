@@ -23,4 +23,6 @@ public interface BhDictionaryLineMapper {
     List<BhDictionaryLine> selectByHeaderCode(String headerCode);
 
     BhDictionaryLine selectByLine(BhDictionaryLine record);
+
+    int deleteDictionaryDetail(List<String> lineIdList);
 }

@@ -144,6 +144,7 @@
     <include refid="Base_Column_List" />
     from bh_dictionary_line
     where header_code = #{headerCode,jdbcType=VARCHAR}
+    and enabled_flag = 'Y'
   </select>
 
   <select id="selectByLine" resultMap="BaseResultMap" parameterType="com.bh.train.model.BhDictionaryLine" >
@@ -161,4 +162,15 @@
       and enabled_flag = #{enabledFlag,jdbcType=VARCHAR}
     </if>
   </select>
+
+  <update id="deleteDictionaryDetail" parameterType="java.util.List">
+    UPDATE bh_dictionary_line
+      <set>
+        enabled_flag = 'N'
+      </set>
+    WHERE line_id IN
+    <foreach collection="list" item="lineIdList" index="index" open="(" separator="," close=")">
+      #{lineIdList}
+    </foreach>
+  </update>
 </mapper>

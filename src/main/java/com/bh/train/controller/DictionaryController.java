@@ -186,7 +186,7 @@ public class DictionaryController extends BaseController<DictionaryController> {
 
     @RequestMapping("/addOrEditDictionaryDetail")
     @ResponseBody
-    public RspData addOrEditDictionaryDetail(@RequestBody BhDictionaryLine bhDictionaryLine) throws IOException {
+    public RspData addOrEditDictionaryDetail(@RequestBody BhDictionaryLine bhDictionaryLine) {
         RspData rspData = null;
         try {
             int res = dictionaryService.saveOrUpdate(bhDictionaryLine);
@@ -203,6 +203,32 @@ public class DictionaryController extends BaseController<DictionaryController> {
         return rspData;
     }
 
-
+    @RequestMapping("/deleteDictionaryDetail")
+    @ResponseBody
+    public RspData deleteDictionaryDetail(@RequestBody String lineId) {
+        RspData rspData = null;
+        String[] lineIds = lineId.split(",");
+        for (String s : lineIds) {
+            BhDictionaryLine bhDictionaryLine = new BhDictionaryLine();
+            bhDictionaryLine.setEnabledFlag(Constant.UN_ENABLE_FLAG);
+            bhDictionaryLine.setLineId(Integer.parseInt(s));
+        }
+        try {
+            int res = dictionaryService.deleteDictionaryDetail(lineIds);
+            if (res >= 1) {
+                rspData = RspData.success(null);
+            } else {
+                logger.error("删除行配置数据库异常！");
+                rspData = RspData.error(Constant.BUSSINESS_ERROR_CODE, "删除字典配置数据库异常！");
+            }
+        } catch (BusinessException e) {
+            logger.error(e.getMessage(), e);
+            rspData = RspData.error(Constant.BUSSINESS_ERROR_CODE, e.getMessage());
+        } catch (Exception e) {
+            logger.error("系统异常！", e);
+            rspData = RspData.error(Constant.SYSTEM_ERROR_CODE, "系统异常！");
+        }
+        return rspData;
+    }
 
 }

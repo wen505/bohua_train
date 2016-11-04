@@ -663,7 +663,6 @@ var commonUtil = {
 			type : "POST",
 			dataType : "json",
 			data : params,
-			contentType : "application/json",
 			success : function(data) {
 				if (data.code=='1') {
 					if(successCallBack!=null){
