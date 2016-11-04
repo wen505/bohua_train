@@ -70,12 +70,11 @@ $(function () {
                             }
                             //将选择到的行存入数组并用,分隔转换成字符串，
                             //本例只是前台操作没有与数据库进行交互所以此处只是弹出要传入后台的id
-                            alert(ids.toString());
                             $.ajax({
                                 url : commonUtil.getRealpath()+"/"+"back/dictionary/deleteDictionaryDetail",
                                 type : "POST",
-                                dataType : "text",
-                                data : ids.toString(),
+                                dataType : "json",
+                                data : JSON.stringify(ids),
                                 contentType : "application/json;charset=utf-8",
                                 success : function(data) {
                                     if (data.code=='1') {

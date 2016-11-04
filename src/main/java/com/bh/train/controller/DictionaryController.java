@@ -45,6 +45,12 @@ public class DictionaryController extends BaseController<DictionaryController> {
 //        }
 //        return rspData;
 //    }
+
+    /**
+     * 查询所有字典配置大类
+     * @param bhDictionaryHeader
+     * @return
+     */
     @RequestMapping("/find")
     @ResponseBody
     public PageController<BhDictionaryHeader> find(BhDictionaryHeader bhDictionaryHeader) {
@@ -74,6 +80,11 @@ public class DictionaryController extends BaseController<DictionaryController> {
         return RspData.success(map);
     }
 
+    /**
+     * 添加字典配置大类
+     * @param bhDictionaryHeader
+     * @return
+     */
     @RequestMapping("/add")
     @ResponseBody
     public RspData add(BhDictionaryHeader bhDictionaryHeader) {
