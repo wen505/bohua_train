@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bh.train.dao.BhNoticeMapper" >
+  <resultMap id="BaseResultMap" type="com.bh.train.model.BhNotice" >
+    <id column="notice_id" property="noticeId" jdbcType="INTEGER" />
+    <result column="notice_name" property="noticeName" jdbcType="VARCHAR" />
+    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="release_user" property="releaseUser" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="enabled_flag" property="enabledFlag" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bh.train.model.BhNotice" extends="BaseResultMap" >
+    <result column="notice_content" property="noticeContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    notice_id, notice_name, image_url, release_user, add_time, update_time, enabled_flag
+  </sql>
+  <sql id="Blob_Column_List" >
+    notice_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bh_notice
+    where notice_id = #{noticeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bh_notice
+    where notice_id = #{noticeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bh.train.model.BhNotice" >
+    <selectKey resultType="java.lang.Integer" keyProperty="noticeId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bh_notice (notice_name, image_url, release_user, 
+      add_time, update_time, enabled_flag, 
+      notice_content)
+    values (#{noticeName,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, #{releaseUser,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{enabledFlag,jdbcType=VARCHAR}, 
+      #{noticeContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bh.train.model.BhNotice" >
+    <selectKey resultType="java.lang.Integer" keyProperty="noticeId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bh_notice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="noticeName != null" >
+        notice_name,
+      </if>
+      <if test="imageUrl != null" >
+        image_url,
+      </if>
+      <if test="releaseUser != null" >
+        release_user,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="enabledFlag != null" >
+        enabled_flag,
+      </if>
+      <if test="noticeContent != null" >
+        notice_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="noticeName != null" >
+        #{noticeName,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseUser != null" >
+        #{releaseUser,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabledFlag != null" >
+        #{enabledFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeContent != null" >
+        #{noticeContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bh.train.model.BhNotice" >
+    update bh_notice
+    <set >
+      <if test="noticeName != null" >
+        notice_name = #{noticeName,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseUser != null" >
+        release_user = #{releaseUser,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabledFlag != null" >
+        enabled_flag = #{enabledFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeContent != null" >
+        notice_content = #{noticeContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where notice_id = #{noticeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bh.train.model.BhNotice" >
+    update bh_notice
+    set notice_name = #{noticeName,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      release_user = #{releaseUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      enabled_flag = #{enabledFlag,jdbcType=VARCHAR},
+      notice_content = #{noticeContent,jdbcType=LONGVARCHAR}
+    where notice_id = #{noticeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bh.train.model.BhNotice" >
+    update bh_notice
+    set notice_name = #{noticeName,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      release_user = #{releaseUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      enabled_flag = #{enabledFlag,jdbcType=VARCHAR}
+    where notice_id = #{noticeId,jdbcType=INTEGER}
+  </update>
+
+  <!--分页查询-->
+  <select id="selectPage" parameterType="com.bh.train.model.BhNotice" resultMap="BaseResultMap">
+    SELECT  b.notice_id, b.notice_name, b.image_url,
+    b.release_user, b.add_time, b.update_time, b.enabled_flag
+    ,u.user_name AS releaseUserName FROM  bh_notice b
+    LEFT JOIN bh_user u ON b.release_user = u.login_name
+    WHERE  b.enabled_flag='Y'
+    <if test="noticeName!=null and noticeName!=''" >
+      and sp.notice_name LIKE  CONCAT('%', #{noticeName,jdbcType=VARCHAR},'%')
+    </if>
+    ORDER  BY  notice_id DESC
+    limit #{start},#{limit}
+  </select>
+  <!--查询记录数-->
+  <select id="selectCount" parameterType="com.bh.train.model.BhNotice" resultType="java.lang.Integer">
+    SELECT  COUNT(1) FROM  bh_notice b
+    LEFT JOIN bh_user u ON b.release_user = u.login_name
+    WHERE  b.enabled_flag='Y'
+    <if test="noticeName!=null and noticeName!=''" >
+      and sp.notice_name LIKE  CONCAT('%', #{noticeName,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
+  <!-- 批量修改用户信息的可用状态 -->
+  <update id="updatbatchNoticeEnabledFlag" parameterType="java.util.List">
+    UPDATE bh_notice
+    set enabled_flag = 'N'
+    WHERE notice_id IN
+    <foreach close=")" collection="list" item="item" open="("
+             separator=",">
+      #{item.noticeId,jdbcType=INTEGER}
+    </foreach>
+  </update>
+
+</mapper>

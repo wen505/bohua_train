@@ -40,12 +40,11 @@ public class LoginController extends BaseController<LoginController> {
     /**
      *登陆
      * @param loginReqVo
-     * @param request
      * @return
      */
     @RequestMapping("/login")
     @ResponseBody
-    public RspData login(LoginReqVo loginReqVo, HttpServletRequest request) {
+    public RspData login(LoginReqVo loginReqVo) {
         BhUser user = null;
         try {
             user = userService.login(loginReqVo);

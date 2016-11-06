@@ -54,6 +54,10 @@ public class BaseController<T> {
 		this.page = request.getParameter("page");
 	}
 
+	protected  String getRealPath(){
+		return getSession().getServletContext().getRealPath("");
+	}
+
 	public Logger getLogger() {
 		return logger;
 	}

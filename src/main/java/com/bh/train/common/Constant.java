@@ -26,7 +26,14 @@ public class Constant {
      * session 中用户key值
      */
     public static final String LOGIN_USER = "LOGIN_USER";
-
+    /**
+     * 上传文件目录
+     */
+    public  static  final String UPLOAD_PATH="upload";
+    /**
+     * 公告上传文件目录
+     */
+    public  static  final String NOTICE_PATH="notice";
     /**
      * 与数据库可用标志对应
      */
