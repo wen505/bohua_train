@@ -2,6 +2,7 @@ package com.bh.train.dao;
 
 import com.bh.train.model.BhCourseInfo;
 import java.util.List;
+import java.util.Map;
 
 public interface BhCourseInfoMapper {
     int deleteByPrimaryKey(Integer id);
@@ -13,8 +14,6 @@ public interface BhCourseInfoMapper {
     BhCourseInfo selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(BhCourseInfo record);
-
-    int updateByPrimaryKeyWithBLOBs(BhCourseInfo record);
 
     int updateByPrimaryKey(BhCourseInfo record);
     /**
@@ -30,4 +29,11 @@ public interface BhCourseInfoMapper {
      * @return
      */
     int selectCount(BhCourseInfo record);
+
+    /**
+     * 根据ID删除课程信息
+     * @param map
+     * @return
+     */
+    int deleteCourseInfos(Map<String, Object> map);
 }

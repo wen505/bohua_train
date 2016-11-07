@@ -3,13 +3,13 @@
 <mapper namespace="com.bh.train.dao.BhCourseInfoMapper" >
   <resultMap id="BaseResultMap" type="com.bh.train.model.BhCourseInfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="class_type" property="classType" jdbcType="INTEGER" />
+    <result column="class_type" property="classType" jdbcType="VARCHAR" />
     <result column="class_name" property="className" jdbcType="VARCHAR" />
     <result column="class_hour" property="classHour" jdbcType="INTEGER" />
     <result column="class_unit" property="classUnit" jdbcType="VARCHAR" />
     <result column="charging_standard" property="chargingStandard" jdbcType="INTEGER" />
     <result column="charging_unit" property="chargingUnit" jdbcType="VARCHAR" />
-    <result column="student_age" property="studentAge" jdbcType="VARCHAR" />
+    <result column="student_type" property="studentType" jdbcType="VARCHAR" />
     <result column="people_num" property="peopleNum" jdbcType="INTEGER" />
     <result column="is_start" property="isStart" jdbcType="VARCHAR" />
     <result column="off_line" property="offLine" jdbcType="VARCHAR" />
@@ -22,7 +22,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, class_type, class_name, class_hour, class_unit, charging_standard, charging_unit, 
-    student_age, people_num, is_start, off_line, add_time, update_time, enabled_flag
+    student_Type, people_num, is_start, off_line, add_time, update_time, enabled_flag
   </sql>
   <sql id="Blob_Column_List" >
     description
@@ -44,13 +44,13 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into bh_course_info (class_type, class_name, class_hour, 
-      class_unit, charging_standard, charging_unit, 
-      student_age, people_num, is_start, 
+      class_unit, charging_standard, charging_unit,
+    student_Type, people_num, is_start,
       off_line, add_time, update_time, 
       enabled_flag, description)
-    values (#{classType,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, #{classHour,jdbcType=INTEGER}, 
+    values (#{classType,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, #{classHour,jdbcType=INTEGER},
       #{classUnit,jdbcType=VARCHAR}, #{chargingStandard,jdbcType=INTEGER}, #{chargingUnit,jdbcType=VARCHAR}, 
-      #{studentAge,jdbcType=VARCHAR}, #{peopleNum,jdbcType=INTEGER}, #{isStart,jdbcType=VARCHAR}, 
+      #{studentType,jdbcType=VARCHAR}, #{peopleNum,jdbcType=INTEGER}, #{isStart,jdbcType=VARCHAR},
       #{offLine,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{enabledFlag,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR})
   </insert>
@@ -78,8 +78,8 @@
       <if test="chargingUnit != null" >
         charging_unit,
       </if>
-      <if test="studentAge != null" >
-        student_age,
+      <if test="studentType != null" >
+        student_type,
       </if>
       <if test="peopleNum != null" >
         people_num,
@@ -105,7 +105,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="classType != null" >
-        #{classType,jdbcType=INTEGER},
+        #{classType,jdbcType=VARCHAR},
       </if>
       <if test="className != null" >
         #{className,jdbcType=VARCHAR},
@@ -122,8 +122,8 @@
       <if test="chargingUnit != null" >
         #{chargingUnit,jdbcType=VARCHAR},
       </if>
-      <if test="studentAge != null" >
-        #{studentAge,jdbcType=VARCHAR},
+      <if test="studentType != null" >
+        #{studentType,jdbcType=VARCHAR},
       </if>
       <if test="peopleNum != null" >
         #{peopleNum,jdbcType=INTEGER},
@@ -148,11 +148,12 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.bh.train.model.BhCourseInfo" >
     update bh_course_info
     <set >
       <if test="classType != null" >
-        class_type = #{classType,jdbcType=INTEGER},
+        class_type = #{classType,jdbcType=VARCHAR},
       </if>
       <if test="className != null" >
         class_name = #{className,jdbcType=VARCHAR},
@@ -169,8 +170,8 @@
       <if test="chargingUnit != null" >
         charging_unit = #{chargingUnit,jdbcType=VARCHAR},
       </if>
-      <if test="studentAge != null" >
-        student_age = #{studentAge,jdbcType=VARCHAR},
+      <if test="studentType != null" >
+        student_type = #{studentType,jdbcType=VARCHAR},
       </if>
       <if test="peopleNum != null" >
         people_num = #{peopleNum,jdbcType=INTEGER},
@@ -196,15 +197,16 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bh.train.model.BhCourseInfo" >
     update bh_course_info
-    set class_type = #{classType,jdbcType=INTEGER},
+    set class_type = #{classType,jdbcType=VARCHAR},
       class_name = #{className,jdbcType=VARCHAR},
       class_hour = #{classHour,jdbcType=INTEGER},
       class_unit = #{classUnit,jdbcType=VARCHAR},
       charging_standard = #{chargingStandard,jdbcType=INTEGER},
       charging_unit = #{chargingUnit,jdbcType=VARCHAR},
-      student_age = #{studentAge,jdbcType=VARCHAR},
+      student_type = #{studentType,jdbcType=VARCHAR},
       people_num = #{peopleNum,jdbcType=INTEGER},
       is_start = #{isStart,jdbcType=VARCHAR},
       off_line = #{offLine,jdbcType=VARCHAR},
@@ -216,13 +218,13 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bh.train.model.BhCourseInfo" >
     update bh_course_info
-    set class_type = #{classType,jdbcType=INTEGER},
+    set class_type = #{classType,jdbcType=VARCHAR},
       class_name = #{className,jdbcType=VARCHAR},
       class_hour = #{classHour,jdbcType=INTEGER},
       class_unit = #{classUnit,jdbcType=VARCHAR},
       charging_standard = #{chargingStandard,jdbcType=INTEGER},
       charging_unit = #{chargingUnit,jdbcType=VARCHAR},
-      student_age = #{studentAge,jdbcType=VARCHAR},
+      student_type = #{studentType,jdbcType=VARCHAR},
       people_num = #{peopleNum,jdbcType=INTEGER},
       is_start = #{isStart,jdbcType=VARCHAR},
       off_line = #{offLine,jdbcType=VARCHAR},
@@ -262,5 +264,21 @@
       AND su.class_name = #{className,jdbcType=VARCHAR}
     </if>
   </select>
+
+    <update id="deleteCourseInfos" parameterType="java.util.Map">
+        UPDATE bh_course_info
+        <set>
+            <if test="flag != null and flag != ''">
+                enabled_flag = #{flag,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id in
+        <foreach collection="ids" item="ids" index="index" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </update>
 
 </mapper>

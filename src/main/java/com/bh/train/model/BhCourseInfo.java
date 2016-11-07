@@ -7,7 +7,7 @@ import java.util.Date;
 public class BhCourseInfo extends BaseModel{
     private Integer id;
 
-    private Integer classType;
+    private String classType;
 
     private String className;
 
@@ -19,7 +19,7 @@ public class BhCourseInfo extends BaseModel{
 
     private String chargingUnit;
 
-    private String studentAge;
+    private String studentType;
 
     private Integer peopleNum;
 
@@ -41,14 +41,6 @@ public class BhCourseInfo extends BaseModel{
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getClassType() {
-        return classType;
-    }
-
-    public void setClassType(Integer classType) {
-        this.classType = classType;
     }
 
     public String getClassName() {
@@ -89,14 +81,6 @@ public class BhCourseInfo extends BaseModel{
 
     public void setChargingUnit(String chargingUnit) {
         this.chargingUnit = chargingUnit;
-    }
-
-    public String getStudentAge() {
-        return studentAge;
-    }
-
-    public void setStudentAge(String studentAge) {
-        this.studentAge = studentAge;
     }
 
     public Integer getPeopleNum() {
@@ -153,5 +137,21 @@ public class BhCourseInfo extends BaseModel{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getClassType() {
+        return classType;
+    }
+
+    public void setClassType(String classType) {
+        this.classType = classType;
+    }
+
+    public String getStudentType() {
+        return studentType;
+    }
+
+    public void setStudentType(String studentType) {
+        this.studentType = studentType;
     }
 }

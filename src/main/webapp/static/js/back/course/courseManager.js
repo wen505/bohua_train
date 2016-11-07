@@ -30,7 +30,7 @@ var courseManager = {
 	 *
 	 */
 	addClickEvent : function () {
-          commonUtil.openWin("view/back/course/add_course.jsp","add_course","添加课程信息",800,400);
+          commonUtil.openWin("view/back/course/addCourse.jsp","add_course","添加课程信息",800,400);
 
 	},
 	/**
@@ -42,7 +42,7 @@ var courseManager = {
 			commonUtil.showMessages("请选择一条要修改的课程", "提示");
 			return;
 		}
-		commonUtil.openWin("view/back/user/update_course.jsp","update_user","编辑课程",800,400);
+		commonUtil.openWin("view/back/course/updateCourse.jsp","update_course","编辑课程",800,400);
 
 	}
 	

@@ -1,5 +1,7 @@
 package com.bh.train.service.impl;
 
+import com.bh.train.common.Constant;
+import com.bh.train.common.exception.BusinessException;
 import com.bh.train.common.service.BaseService;
 import com.bh.train.common.util.PageController;
 import com.bh.train.dao.BhCourseInfoMapper;
@@ -8,6 +10,8 @@ import com.bh.train.service.CourseService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -33,5 +37,28 @@ public class CourseServiceImpl extends BaseService implements CourseService {
         return  controller;
     }
 
+
+    @Override
+    public int addBhCourseInfo(BhCourseInfo bhCourseInfo) {
+        return bhCourseInfoMapper.insertSelective(bhCourseInfo);
+    }
+
+    @Override
+    public int updateBhCourseInfo(BhCourseInfo bhCourseInfo) {
+        return bhCourseInfoMapper.updateByPrimaryKeySelective(bhCourseInfo);
+    }
+
+    @Override
+    public int deleteCourseInfos(List<String> ids){
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("updateTime", new Date());
+        map.put("flag", Constant.UN_ENABLE_FLAG);
+        map.put("ids", ids);
+        int res = bhCourseInfoMapper.deleteCourseInfos(map);
+        if (res != ids.size()) {
+            throw new BusinessException("删除课程配置异常", Constant.BUSSINESS_ERROR_CODE);
+        }
+        return res;
+    }
 
 }

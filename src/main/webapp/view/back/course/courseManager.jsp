@@ -16,10 +16,11 @@
 		<table id="queryTable" width="100%" border="1" cellpadding="0" cellspacing="0" class="" data-options="onClickRow: courseManager.onClickRow">
 			<thead>
 				<tr>
-					<th data-options="field:'userId',align:'center',checkbox:true"scope="col" width="7%"></th>
-					<th data-options="field:'loginName',editor:'text'" width="20%">课程类型</th>
-					<th data-options="field:'userName',editor:'text'" width="20%">课程名称</th>
-                    <th data-options="field:'sex',editor:'text'" formatter="commonUtil.sexFormatter" width="60%">课程说明</th>
+					<th data-options="field:'id',align:'center',checkbox:true"scope="col" width="10%"></th>
+					<th data-options="field:'classType',editor:'text'" width="20%">课程类型</th>
+					<th data-options="field:'className',editor:'text'" width="20%">课程名称</th>
+					<th data-options="field:'isStart',editor:'text'" width="20%">是否开课</th>
+					<th data-options="field:'description',editor:'text'" formatter="commonUtil.longTextFormatter" width="30%">课程说明</th>
 				</tr>
 			</thead>
 		</table>
@@ -35,9 +36,9 @@
 			</tr>
 		</table>
 		<div style='' align="right">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-add" id="addCourse"  style="display: none;"  onclick="courseManager.addClickEvent()"  plain="true" title="添加">添加</a>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-edit" id="updateCourse"  style="display: none;" onclick="courseManager.updateClickEvent()"  plain="true" title="编辑">编辑课程</a>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" id="delCourse"   style="display: none;"  onclick="courseManager.delet()"  plain="true" title="删除">删除</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-add" id="addCourse" onclick="courseManager.addClickEvent()"  plain="true" title="添加">添加</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-edit" id="updateCourse" onclick="courseManager.updateClickEvent()"  plain="true" title="编辑">编辑课程</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" id="delCourse" onclick="courseManager.delet()"  plain="true" title="删除">删除</a>
 
 		</div>
 	</div>

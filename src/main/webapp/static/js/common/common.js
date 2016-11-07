@@ -367,6 +367,20 @@ var commonUtil = {
 				break;
 		}
 	},
+
+	/**
+	 * 截取字符串，用省略号代替
+	 */
+	longTextFormatter : function(value,row,index){
+		if(index == null || index == ''){
+			index = 10;
+		}
+		if(value != null && value.length >index){
+			return value.substring(0,index)+"...";
+		}
+			return value;
+	},
+
 	/**
 	 * 
 	 * @param msg
