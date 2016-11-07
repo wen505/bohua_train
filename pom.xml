@@ -13,6 +13,7 @@
     <spring.version>4.1.4.RELEASE</spring.version>
     <jackson.version>2.5.0</jackson.version>
     <slf4j.version>1.6.4</slf4j.version>
+    <java.home>D:\Java\jdk1.8.0_111\jre</java.home>
   </properties>
 
   <dependencies>
@@ -248,7 +249,18 @@
           <show>private</show>
         </configuration>
       </plugin>
-
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <encoding>UTF-8</encoding>
+          <compilerArguments>
+            <bootclasspath>
+              ${java.home}\lib\rt.jar;${java.home}\lib\jce.jar
+            </bootclasspath>
+          </compilerArguments>
+        </configuration>
+      </plugin>
 
       <plugin>
         <groupId>org.apache.tomcat.maven</groupId>

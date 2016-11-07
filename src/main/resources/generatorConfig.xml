@@ -4,9 +4,9 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <classPathEntry location="E:\\mybatis generator\\mysql-connector-java-5.1.34.jar"/>
+    <classPathEntry location="D:\repository\mysql\mysql-connector-java\5.1.34\mysql-connector-java-5.1.34.jar"/>
     <context id="mysqlTables" targetRuntime="MyBatis3">
-
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
        <!-- <property name="mergeable" value="false"></property>-->
 
         <!--&lt;!&ndash; 去除注释 显示注释false &ndash;&gt;-->
@@ -24,31 +24,25 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.bh.train.model" targetProject="E:/demo/bohua_train/src/main/java">
+        <javaModelGenerator targetPackage="com.bh.train.model" targetProject="F:/code/bohua_train/src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="com.bh.train.dao" targetProject="E:/demo/bohua_train/src/main/java">
+        <sqlMapGenerator targetPackage="com.bh.train.dao" targetProject="F:/code/bohua_train/src/main/java">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.bh.train.dao" targetProject="E:/demo/bohua_train/src/main/java">
+                             targetPackage="com.bh.train.dao" targetProject="F:/code/bohua_train/src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <!--<table tableName="bh_dictionary_header" domainObjectName="BhDictionaryHeader"
+        <table tableName="bh_recruit" domainObjectName="BhRecruit"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
-            &lt;!&ndash;<generatedKey column="user_role_id" sqlStatement="mysql" identity="true"/>&ndash;&gt;
-        </table>-->
-        <table tableName="bh_dictionary_line" domainObjectName="BhDictionaryLine"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-            <generatedKey column="line_id" sqlStatement="mysql" identity="true"/>
+            <generatedKey column="recruit_id" sqlStatement="mysql" identity="true"/>
         </table>
 
     </context>

@@ -6,7 +6,7 @@
         "menus": [
             {
                 "menuid": "201",
-                "menuname": "出单量统计",
+                "menuname": "用户管理",
                 "icon": "icon-nav",
                 "url": "/view/back/user/userManager.jsp?linkName=reportInfoPage"
             },
@@ -17,10 +17,22 @@
                 "url": "/view/back/role/roleManager.jsp?linkName=reportInfoPage"
             },
             {
-                "menuid": "202",
+                "menuid": "203",
                 "menuname": "权限管理",
                 "icon": "icon-nav",
                 "url": "/view/back/permission/permissionManager.jsp?linkName=reportInfoPage"
+            },
+            {
+                "menuid": "204",
+                "menuname": "公告管理",
+                "icon": "icon-nav",
+                "url": "/view/back/notice/noticeManager.jsp"
+            },
+            {
+                "menuid": "205",
+                "menuname": "招聘管理",
+                "icon": "icon-nav",
+                "url": "/view/back/recruit/recruitManager.jsp"
             }
         ]
     },

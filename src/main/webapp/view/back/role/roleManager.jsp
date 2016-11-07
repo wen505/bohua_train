@@ -17,7 +17,7 @@
 	  <tr>
 		  <th data-options="field:'roleId',align:'center',checkbox:true"scope="col" width="7%"></th>
 		  <th data-options="field:'roleName',editor:'text'" width="37%">角色名</th>
-		  <th data-options="field:'memo',editor:'text'" width="60%">备注</th>
+		  <th data-options="field:'memo',editor:'text'" width="45%">备注</th>
 
 	  </tr>
 	  </thead>

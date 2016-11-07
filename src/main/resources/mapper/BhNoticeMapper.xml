@@ -149,7 +149,7 @@
     LEFT JOIN bh_user u ON b.release_user = u.login_name
     WHERE  b.enabled_flag='Y'
     <if test="noticeName!=null and noticeName!=''" >
-      and sp.notice_name LIKE  CONCAT('%', #{noticeName,jdbcType=VARCHAR},'%')
+      and b.notice_name LIKE  CONCAT('%', #{noticeName,jdbcType=VARCHAR},'%')
     </if>
     ORDER  BY  notice_id DESC
     limit #{start},#{limit}
@@ -160,7 +160,7 @@
     LEFT JOIN bh_user u ON b.release_user = u.login_name
     WHERE  b.enabled_flag='Y'
     <if test="noticeName!=null and noticeName!=''" >
-      and sp.notice_name LIKE  CONCAT('%', #{noticeName,jdbcType=VARCHAR},'%')
+      and b.notice_name LIKE  CONCAT('%', #{noticeName,jdbcType=VARCHAR},'%')
     </if>
   </select>
   <!-- 批量修改用户信息的可用状态 -->

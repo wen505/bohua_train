@@ -17,8 +17,8 @@
 			<thead>
 				<tr>
 					<th data-options="field:'userId',align:'center',checkbox:true"scope="col" width="7%"></th>
-					<th data-options="field:'loginName',editor:'text'" width="40%">登录名称</th>
-					<th data-options="field:'userName',editor:'text'" width="30%">姓名</th>
+					<th data-options="field:'loginName',editor:'text'" width="20%">登录名称</th>
+					<th data-options="field:'userName',editor:'text'" width="20%">姓名</th>
                     <th data-options="field:'sex',editor:'text'" formatter="commonUtil.sexFormatter" width="20%">性别</th>
 					<th data-options="field:'opera',editor:'text'" formatter="userManager.resetPwd" width="20%">操作</th>
 				</tr>

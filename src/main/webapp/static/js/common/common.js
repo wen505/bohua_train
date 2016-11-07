@@ -503,7 +503,7 @@ var commonUtil = {
 			$('#' + showmsg).append("<font color='red'>" + msg + "</font>");
 			$('#' + inputid).focus();
 			return false;
-		} else if (isnull == false&&regex != null && inputname != "" && !regex.test(inputname)) {
+		} else if (regex != null && inputname != "" && !regex.test(inputname)) {
 			$('#' + showmsg).empty();
 			$('#' + showmsg).append("<font color='red'>" + msg + "</font>");
 			$('#' + inputid).val("");
@@ -681,5 +681,12 @@ var commonUtil = {
 				}
 			}
 		});
+	},
+	/**
+	 * 常量定义
+	 */
+	constant :{
+		notice : 'notice'//模板公共
 	}
+
 };

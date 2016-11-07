@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bh.train.dao.BhRecruitMapper" >
+  <resultMap id="BaseResultMap" type="com.bh.train.model.BhRecruit" >
+    <id column="recruit_id" property="recruitId" jdbcType="INTEGER" />
+    <result column="recruit_job" property="recruitJob" jdbcType="VARCHAR" />
+    <result column="sn" property="sn" jdbcType="INTEGER" />
+    <result column="release_time" property="releaseTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="enabled_flag" property="enabledFlag" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bh.train.model.BhRecruitWithBLOBs" extends="BaseResultMap" >
+    <result column="job_duty" property="jobDuty" jdbcType="LONGVARCHAR" />
+    <result column="job_request" property="jobRequest" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    recruit_id, recruit_job, sn, release_time, update_time, enabled_flag
+  </sql>
+  <sql id="Blob_Column_List" >
+    job_duty, job_request
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bh_recruit
+    where recruit_id = #{recruitId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bh_recruit
+    where recruit_id = #{recruitId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bh.train.model.BhRecruitWithBLOBs" >
+    <selectKey resultType="java.lang.Integer" keyProperty="recruitId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bh_recruit (recruit_job, sn, release_time, 
+      update_time, enabled_flag, job_duty, 
+      job_request)
+    values (#{recruitJob,jdbcType=VARCHAR}, #{sn,jdbcType=INTEGER}, #{releaseTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{enabledFlag,jdbcType=VARCHAR}, #{jobDuty,jdbcType=LONGVARCHAR}, 
+      #{jobRequest,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bh.train.model.BhRecruitWithBLOBs" >
+    <selectKey resultType="java.lang.Integer" keyProperty="recruitId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bh_recruit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recruitJob != null" >
+        recruit_job,
+      </if>
+      <if test="sn != null" >
+        sn,
+      </if>
+      <if test="releaseTime != null" >
+        release_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="enabledFlag != null" >
+        enabled_flag,
+      </if>
+      <if test="jobDuty != null" >
+        job_duty,
+      </if>
+      <if test="jobRequest != null" >
+        job_request,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recruitJob != null" >
+        #{recruitJob,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=INTEGER},
+      </if>
+      <if test="releaseTime != null" >
+        #{releaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabledFlag != null" >
+        #{enabledFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="jobDuty != null" >
+        #{jobDuty,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="jobRequest != null" >
+        #{jobRequest,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bh.train.model.BhRecruitWithBLOBs" >
+    update bh_recruit
+    <set >
+      <if test="recruitJob != null" >
+        recruit_job = #{recruitJob,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        sn = #{sn,jdbcType=INTEGER},
+      </if>
+      <if test="releaseTime != null" >
+        release_time = #{releaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabledFlag != null" >
+        enabled_flag = #{enabledFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="jobDuty != null" >
+        job_duty = #{jobDuty,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="jobRequest != null" >
+        job_request = #{jobRequest,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where recruit_id = #{recruitId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bh.train.model.BhRecruitWithBLOBs" >
+    update bh_recruit
+    set recruit_job = #{recruitJob,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=INTEGER},
+     /* release_time = #{releaseTime,jdbcType=TIMESTAMP},*/
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      enabled_flag = #{enabledFlag,jdbcType=VARCHAR},
+      job_duty = #{jobDuty,jdbcType=LONGVARCHAR},
+      job_request = #{jobRequest,jdbcType=LONGVARCHAR}
+    where recruit_id = #{recruitId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bh.train.model.BhRecruit" >
+    update bh_recruit
+    set recruit_job = #{recruitJob,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=INTEGER},
+    /*  release_time = #{releaseTime,jdbcType=TIMESTAMP},*/
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      enabled_flag = #{enabledFlag,jdbcType=VARCHAR}
+    where recruit_id = #{recruitId,jdbcType=INTEGER}
+  </update>
+
+  <!--分页查询-->
+  <select id="selectPage" parameterType="com.bh.train.model.BhRecruit" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM  bh_recruit b
+    WHERE  b.enabled_flag='Y'
+    <if test="recruitJob!=null and recruitJob!=''" >
+      and b.recruit_job LIKE  CONCAT('%', #{recruitJob,jdbcType=VARCHAR},'%')
+    </if>
+    ORDER  BY  recruit_id DESC
+    limit #{start},#{limit}
+  </select>
+  <!--查询记录数-->
+  <select id="selectCount" parameterType="com.bh.train.model.BhNotice" resultType="java.lang.Integer">
+    SELECT  COUNT(1) FROM  bh_recruit b
+    WHERE  b.enabled_flag='Y'
+    <if test="recruitJob!=null and recruitJob!=''" >
+      and b.recruit_job LIKE  CONCAT('%', #{recruitJob,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
+  <!-- 批量修改用户信息的可用状态 -->
+  <update id="updatbatchRecruitEnabledFlag" parameterType="java.util.List">
+    UPDATE bh_notice
+    set enabled_flag = 'N'
+    WHERE notice_id IN
+    <foreach close=")" collection="list" item="item" open="("
+             separator=",">
+      #{item.recruit_id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+
+</mapper>
