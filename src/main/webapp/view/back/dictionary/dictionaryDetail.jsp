@@ -17,11 +17,11 @@
     <tr>
         <th data-options="field:'lineId',align:'center',checkbox:true" scope="col" width="10%"></th>
         <th data-options="field:'lineName',editor:'text'" width="20%">行配置名称</th>
-        <th data-options="field:'value',editor:'text'" width="20%">行配置值</th>
-        <th data-options="field:'isDefault',editor:'text'" width="20%">是否默认</th>
+        <th data-options="field:'lineCode'" width="20%">行配置值</th>
+        <th data-options="field:'isDefault',formatter: dictionaryDetail.typeFormatter,editor:{type:'combobox', options:{required:true, editable:false, data:[{'id':'Y','text':'是'},{'id':'N','text':'否'}], valueField:'id', textField:'text'}}" width="20%">是否默认</th>
         <th data-options="field:'sn',editor:'text'" width="20%">序列</th>
-        <th data-options="field:'dictionaryType',editor:'text', formatter: dictionaryDetail.typeFormatter" width="20%">配置类型</th>
-        <th data-options="field:'memo',editor:'text'" width="40%">备注</th>
+        <%--<th data-options="field:'dictionaryType',editor:'text', formatter: dictionaryDetail.typeFormatter" width="20%">配置类型</th>--%>
+        <th data-options="field:'memo',editor:'text'" width="20%">备注</th>
     </tr>
     </thead>
 </table>

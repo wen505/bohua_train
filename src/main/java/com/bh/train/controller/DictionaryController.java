@@ -15,18 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bh.train.model.BhDictionaryHeader;
 import com.bh.train.model.BhDictionaryLine;
-import com.bh.train.model.BhUser;
 import com.bh.train.service.DictionaryService;
 import com.bh.train.vo.SelectVo;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
 
 @Controller
@@ -50,6 +45,12 @@ public class DictionaryController extends BaseController<DictionaryController> {
 //        }
 //        return rspData;
 //    }
+
+    /**
+     * 查询所有字典配置大类
+     * @param bhDictionaryHeader
+     * @return
+     */
     @RequestMapping("/find")
     @ResponseBody
     public PageController<BhDictionaryHeader> find(BhDictionaryHeader bhDictionaryHeader) {
@@ -79,6 +80,11 @@ public class DictionaryController extends BaseController<DictionaryController> {
         return RspData.success(map);
     }
 
+    /**
+     * 添加字典配置大类
+     * @param bhDictionaryHeader
+     * @return
+     */
     @RequestMapping("/add")
     @ResponseBody
     public RspData add(BhDictionaryHeader bhDictionaryHeader) {
@@ -187,6 +193,53 @@ public class DictionaryController extends BaseController<DictionaryController> {
             logger.error(e.getMessage(), e);
         }
         return bhDictionaryLineList;
+    }
+
+    @RequestMapping("/addOrEditDictionaryDetail")
+    @ResponseBody
+    public RspData addOrEditDictionaryDetail(@RequestBody BhDictionaryLine bhDictionaryLine) {
+        RspData rspData = null;
+        try {
+            int res = dictionaryService.saveOrUpdate(bhDictionaryLine);
+            if (res == 1) {
+                rspData = RspData.success(null);
+            } else {
+                logger.error("修改行配置数据库异常！");
+                rspData = RspData.error(Constant.BUSSINESS_ERROR_CODE, "删除字典配置数据库异常！");
+            }
+        } catch (Exception e) {
+            logger.error("系统异常！", e);
+            rspData = RspData.error(Constant.SYSTEM_ERROR_CODE, "系统异常！");
+        }
+        return rspData;
+    }
+
+    @RequestMapping("/deleteDictionaryDetail")
+    @ResponseBody
+    public RspData deleteDictionaryDetail(@RequestBody String lineId) {
+        RspData rspData = null;
+        String[] lineIds = lineId.split(",");
+        for (String s : lineIds) {
+            BhDictionaryLine bhDictionaryLine = new BhDictionaryLine();
+            bhDictionaryLine.setEnabledFlag(Constant.UN_ENABLE_FLAG);
+            bhDictionaryLine.setLineId(Integer.parseInt(s));
+        }
+        try {
+            int res = dictionaryService.deleteDictionaryDetail(lineIds);
+            if (res >= 1) {
+                rspData = RspData.success(null);
+            } else {
+                logger.error("删除行配置数据库异常！");
+                rspData = RspData.error(Constant.BUSSINESS_ERROR_CODE, "删除字典配置数据库异常！");
+            }
+        } catch (BusinessException e) {
+            logger.error(e.getMessage(), e);
+            rspData = RspData.error(Constant.BUSSINESS_ERROR_CODE, e.getMessage());
+        } catch (Exception e) {
+            logger.error("系统异常！", e);
+            rspData = RspData.error(Constant.SYSTEM_ERROR_CODE, "系统异常！");
+        }
+        return rspData;
     }
 
 }

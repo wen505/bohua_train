@@ -5,7 +5,7 @@ public class BhDictionaryLine {
 
     private String headerCode;
 
-    private String value;
+    private String lineCode;
 
     private Integer sn;
 
@@ -33,12 +33,12 @@ public class BhDictionaryLine {
         this.headerCode = headerCode == null ? null : headerCode.trim();
     }
 
-    public String getValue() {
-        return value;
+    public String getLineCode() {
+        return lineCode;
     }
 
-    public void setValue(String value) {
-        this.value = value == null ? null : value.trim();
+    public void setLineCode(String lineCode) {
+        this.lineCode = lineCode == null ? null : lineCode.trim();
     }
 
     public Integer getSn() {

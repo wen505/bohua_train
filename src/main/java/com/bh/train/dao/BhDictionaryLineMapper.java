@@ -18,7 +18,11 @@ public interface BhDictionaryLineMapper {
 
     int updateByPrimaryKey(BhDictionaryLine record);
 
-    int deleteDictionaryLines(Map<String, Object> map);
+    int deleteDictionaryLines(Map map);
 
     List<BhDictionaryLine> selectByHeaderCode(String headerCode);
+
+    BhDictionaryLine selectByLine(BhDictionaryLine record);
+
+    int deleteDictionaryDetail(List<String> lineIdList);
 }

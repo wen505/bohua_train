@@ -12,6 +12,7 @@ import com.bh.train.service.DictionaryService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -59,11 +60,13 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
         map.put("flag", Constant.UN_ENABLE_FLAG);
         map.put("headerCodes", headerCodes);
         int res = bhDictionaryHeaderMapper.deleteDictionarys(map);
-        if (res != 1) {
+        if (res != headerCodes.size()) {
             throw new BusinessException("删除字典配置异常", Constant.BUSSINESS_ERROR_CODE);
         }else {
-            res = bhDictionaryLineMapper.deleteDictionaryLines(map);
-            if (res != 1) {
+            try {
+                res = bhDictionaryLineMapper.deleteDictionaryLines(map);
+                res = 1;
+            } catch (Exception e) {
                 throw new BusinessException("删除字典配置异常", Constant.BUSSINESS_ERROR_CODE);
             }
         }
@@ -79,5 +82,26 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
     @Override
     public List<BhDictionaryLine> queryDetailByHeaderCode(String headerCode) {
         return bhDictionaryLineMapper.selectByHeaderCode(headerCode);
+    }
+
+    public int saveOrUpdate(BhDictionaryLine bhDictionaryLine) {
+        BhDictionaryLine dictionaryLine = bhDictionaryLineMapper.selectByLine(bhDictionaryLine);
+        int res = 0;
+        if (dictionaryLine != null) {//更新
+            bhDictionaryLine.setLineId(dictionaryLine.getLineId());
+            res = bhDictionaryLineMapper.updateByPrimaryKeySelective(bhDictionaryLine);
+        } else {//新增
+            res = bhDictionaryLineMapper.insertSelective(bhDictionaryLine);
+        }
+        return res;
+    }
+
+    public int deleteDictionaryDetail(String[] lineIds) {
+        List<String> lineIdList = Arrays.asList(lineIds);
+        int res = bhDictionaryLineMapper.deleteDictionaryDetail(lineIdList);
+        if(res <= 0){
+            throw new BusinessException("删除行配置异常", Constant.BUSSINESS_ERROR_CODE);
+        }
+        return res;
     }
 }

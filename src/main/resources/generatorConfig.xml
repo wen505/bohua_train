@@ -38,12 +38,12 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="bh_dictionary_header" domainObjectName="BhDictionaryHeader"
+        <!--<table tableName="bh_dictionary_header" domainObjectName="BhDictionaryHeader"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
-            <!--<generatedKey column="user_role_id" sqlStatement="mysql" identity="true"/>-->
-        </table>
+            &lt;!&ndash;<generatedKey column="user_role_id" sqlStatement="mysql" identity="true"/>&ndash;&gt;
+        </table>-->
         <table tableName="bh_dictionary_line" domainObjectName="BhDictionaryLine"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
