@@ -23,11 +23,11 @@
 		<div>
 			<span>招聘职位:</span>
 					<span><input type="text" id="recruitJob" name="recruitJob"
-								 value="" style="width: 400px" class="easyui-input" /></span>
+								 value="" style="width: 200px" class="easyui-input" /></span>
 			&nbsp;	&nbsp;	&nbsp;	&nbsp;
 			<span>排序:</span>
 					<span><input type="text" id="sn" name="sn"
-								 value="" style="width: 400px" class="easyui-input" /></span>
+								 value="" style="width: 200px" class="easyui-input" /></span>
 		</div>
 		<span style="margin-top: 11px;">职位责任:</span>
 		<div>
