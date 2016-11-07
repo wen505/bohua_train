@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Created by lp on 2016/11/4.
+ * Created by lp on 2016/11/7.
  */
 @Service("fileOperateService")
 public class FileOperateServiceImpl extends BaseService implements FileOperateService {
@@ -75,13 +75,13 @@ public class FileOperateServiceImpl extends BaseService implements FileOperateSe
     }
 
     @Override
-    public RspUploadVo uploadImage(String realPath,MultipartFile file, String filename, String remotepath, String width, String height) {
+    public RspUploadVo uploadImage(String realPath, MultipartFile file, String filename, String remotepath, String width, String height) {
         boolean flag = false;
         String separator= System.getProperty("file.separator");
         String imageName="";
         if(StringUtils.isEmpty(filename)){
             String[] image =  file.getOriginalFilename().split("\\.");
-            imageName =ServiceUtil.getidByUUID() +"."+ image[image.length-1];
+            imageName = ServiceUtil.getidByUUID() +"."+ image[image.length-1];
         }else{
             imageName = filename;
         }
@@ -97,11 +97,13 @@ public class FileOperateServiceImpl extends BaseService implements FileOperateSe
             }
             String  url  = path+separator+remotepath+separator+imageName;
             if(!StringUtils.isEmpty(width)){
-                int w= Integer.parseInt(StringUtils.isEmpty(width)?"1000":width);
+                int w= Integer.parseInt(width);
                 ImageCompressUtil.saveMinPhoto(file.getInputStream(), url, w,  0.9d);
-            }else{
-                int h= Integer.parseInt(StringUtils.isEmpty(height)?"200":height);
+            }else if(!StringUtils.isEmpty(height)){
+                int h= Integer.parseInt(height);
                 ImageCompressUtil.saveMinPhoto(file.getInputStream(), url, h,  1d);
+            }else{
+                file.getSize();
             }
             flag = true;
         } catch (IllegalStateException e) {
