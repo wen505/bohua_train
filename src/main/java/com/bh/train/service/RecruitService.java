@@ -2,7 +2,6 @@ package com.bh.train.service;
 
 import com.bh.train.common.util.PageController;
 import com.bh.train.model.BhRecruit;
-import com.bh.train.model.BhRecruit;
 import com.bh.train.model.BhRecruitWithBLOBs;
 
 import java.util.List;
