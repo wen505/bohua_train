@@ -9,7 +9,9 @@ var update_notice={
 		commonUtil.ajaxSubmit("back/notice/getById.do", {"noticeId": row.noticeId}, function(){
 			commonUtil.checkingshowmsg(false, "初始化公告内容失败！", "", "", "errormsg");
 		}, function(res){
-			 KindEditor.html('#editor_id', res.data.noticeContent);
+			notice_ue.ready(function() {//编辑器初始化完成再赋值
+				notice_ue.setContent(res.data.noticeContent);  //赋值给UEditor
+			});
 		});
 		$('#noticeName').val(row.noticeName);
 		$('#noticeId').val(row.noticeId);
@@ -32,7 +34,7 @@ var update_notice={
 			'noticeId' :$("#noticeId").val(),//本次修改后的图片
 			'imageUrl' :$("#imageUrl").val(),//本次修改后的图片
 			'noticeName' :$("#noticeName").val(),
-			'noticeContent' : notice_ue.html(),
+			'noticeContent' : notice_ue.getContent(),
 			'nextImageUrl':$("#nextImageUrl").val()//上次添加时候的图片
 		};
 		commonUtil.ajaxSubmit("back/notice/update.do",params,function () {

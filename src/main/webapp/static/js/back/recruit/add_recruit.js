@@ -10,8 +10,8 @@ var add_recruit = {
 		var params= {
 			'recruitJob' :$("#recruitJob").val(),
 			'sn' :$("#sn").val(),
-			'jobDuty' :job_duty.html(),
-			'jobRequest' : job_request.html()
+			'jobDuty' :job_duty.getContent(),
+			'jobRequest' : job_request.getContent()
 		};
       commonUtil.ajaxSubmit("back/recruit/insert.do",params,function () {
 		  commonUtil.checkingshowmsg(false, "保存失败！", "", "", "errormsg");

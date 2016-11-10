@@ -15,9 +15,6 @@
 	<script type="text/javascript"
 			src="${pageContext.request.contextPath}/static/plugin/uploadPreview/uploadPreview.min.js"></script>
 
-	<script type="text/javascript"
-			src="${pageContext.request.contextPath}/static/js/back/notice/noticeoperate.js">
-	</script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/static/js/back/notice/update_notice.js"></script>
 	<script>
@@ -88,9 +85,7 @@
 		</a>
 		</div>
 		<div style="margin-top: 11px;">
-						<textarea id="editor_id" name="content" style="width:99%;height:350px;">
-
-						</textarea>
+			<script id="editor" type="text/plain" style="width:99%;height:300px;"></script>
 		</div>
 
 	</div>
@@ -99,7 +94,7 @@
 </form>
 <script type="text/javascript"
 		src="${pageContext.request.contextPath}/static/js/back/notice/noticeoperate.js"></script>
-<div align="center" class="bottom_div">
+<div align="center" class="bottom_div" style="z-index: 999">
 	<a href="javascript:void(0)" class="easyui-linkbutton"
 	   data-options="iconCls:'icon-ok'" id='addButton'
 	   onclick="update_notice.submit() ">&nbsp;保存&nbsp;</a>

@@ -78,14 +78,12 @@
     color: #fff;
     text-align: center;
     border-radius: 3px;
-    overflow: hidden;"> <input type="file"
-																 id="file" name="file" />上传图片
+    overflow: hidden;"> <input type="file" id="file" name="file" />上传图片
 			</a>
 			</div>
 			<div style="margin-top: 11px;">
-						<textarea id="editor_id" name="content" style="width:99%;height:350px;">
+				<script id="editor" type="text/plain" style="width:99%;height:300px;"></script>
 
-						</textarea>
 			</div>
 
 		</div>
@@ -94,7 +92,7 @@
 	</form>
 	<script type="text/javascript"
 			src="${pageContext.request.contextPath}/static/js/back/notice/noticeoperate.js"></script>
-	<div align="center" class="bottom_div">
+	<div align="center" class="bottom_div" style="z-index: 999">
 		<a href="javascript:void(0)" class="easyui-linkbutton"
 			data-options="iconCls:'icon-ok'" id='addButton'
 			onclick="add_notice.submit() ">&nbsp;保存&nbsp;</a>

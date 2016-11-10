@@ -7,7 +7,7 @@ var add_notice = {
 		var params= {
 			'imageUrl' :$("#imageUrl").val(),
 			'noticeName' :$("#noticeName").val(),
-			'noticeContent' : notice_ue.html()
+			'noticeContent' : notice_ue.getContent()
 		};
       commonUtil.ajaxSubmit("back/notice/insert.do",params,function () {
 		  commonUtil.checkingshowmsg(false, "保存失败！", "", "", "errormsg");

@@ -31,13 +31,13 @@
 		</div>
 		<span style="margin-top: 11px;">职位责任:</span>
 		<div>
-						<textarea id="job_duty" name="job_duty" style="width:99%;height:250px;">
+						<textarea id="job_duty" name="job_duty" style="width:99%;height:190px;">
 
 						</textarea>
 		</div>
 		<span style="margin-top: 11px;">任职资格:</span>
 		<div>
-						<textarea id="job_request" name="job_request" style="width:99%;height:250px;">
+						<textarea id="job_request" name="job_request" style="width:99%;height:190px;">
 
 						</textarea>
 		</div>
@@ -47,7 +47,7 @@
 </form>
 <script type="text/javascript"
 		src="${pageContext.request.contextPath}/static/js/back/recruit/recruitoperate.js"></script>
-<div align="center" class="bottom_div">
+<div align="center" class="bottom_div"  style="z-index: 999">
 	<a href="javascript:void(0)" class="easyui-linkbutton"
 	   data-options="iconCls:'icon-ok'" id='addButton'
 	   onclick="update_recruit.updte()">&nbsp;保存&nbsp;</a>

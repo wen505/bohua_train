@@ -54,7 +54,18 @@
           <artifactId>jstl</artifactId>
           <version>1.2</version>
       </dependency>
-
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20090211</version>
+    </dependency>
+    <dependency>
+      <groupId>com.baidu.ueditor</groupId>
+      <artifactId>ueditor</artifactId>
+      <version>1.1.2</version>
+      <scope>system</scope>
+      <systemPath>F:/code/bohua_train/src/main/webapp/static/plugin/ueditor1_4_3_3/jsp/lib/ueditor-1.1.2.jar</systemPath>
+    </dependency>
     <!-- http://mvnrepository.com/artifact/commons-io/commons-io -->
     <dependency>
       <groupId>commons-io</groupId>
@@ -67,6 +78,12 @@
       <artifactId>commons-fileupload</artifactId>
       <version>1.2.2</version>
     </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.10</version>
+    </dependency>
+
     <!-- json -->
     <dependency>
       <groupId>org.codehaus.jackson</groupId>
