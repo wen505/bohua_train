@@ -34,4 +34,6 @@ public interface BhDictionaryHeaderMapper {
     int selectCount(BhDictionaryHeader record);
 
     int deleteDictionarys(Map<String, Object> map);
+
+    List<BhDictionaryHeader> selectAll();
 }

@@ -142,7 +142,7 @@ $(function () {
                 url : commonUtil.getRealpath()+"/"+"back/dictionary/addOrEditDictionaryDetail",
                 type : "POST",
                 dataType : "json",
-                data : params,
+                data : JSON.stringify(rowData),
                 contentType : "application/json",
                 success : function(data) {
                     if (data.code=='1') {

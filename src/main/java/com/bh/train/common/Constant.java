@@ -42,4 +42,9 @@ public class Constant {
      * 与数据库不可用标志对应
      */
     public static final String UN_ENABLE_FLAG = "N";
+
+    /**
+     * cache名称
+     */
+    public static final String CACHE_NAME = "bohua";
 }

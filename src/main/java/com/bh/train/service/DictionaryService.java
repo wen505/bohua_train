@@ -32,4 +32,8 @@ public interface DictionaryService {
      * @return
      */
     public int deleteDictionaryDetail(String[] lineIds);
+
+    public List<BhDictionaryHeader> findAllDictionaryHeader();
+
+    public List<BhDictionaryLine> findAllDictionaryDetail();
 }

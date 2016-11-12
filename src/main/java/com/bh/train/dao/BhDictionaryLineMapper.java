@@ -25,4 +25,6 @@ public interface BhDictionaryLineMapper {
     BhDictionaryLine selectByLine(BhDictionaryLine record);
 
     int deleteDictionaryDetail(List<String> lineIdList);
+
+    List<BhDictionaryLine> selectAll();
 }
