@@ -9,6 +9,8 @@ import com.bh.train.dao.BhDictionaryLineMapper;
 import com.bh.train.model.BhDictionaryHeader;
 import com.bh.train.model.BhDictionaryLine;
 import com.bh.train.service.DictionaryService;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -54,6 +56,7 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
     }
 
     @Override
+    @CacheEvict
     public int deleteDictionaryHeaders(List<String> headerCodes){
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("updateTime", new Date());
@@ -80,10 +83,12 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
     }
 
     @Override
+    @Cacheable(value="bohua", key="#headerCode")
     public List<BhDictionaryLine> queryDetailByHeaderCode(String headerCode) {
         return bhDictionaryLineMapper.selectByHeaderCode(headerCode);
     }
 
+    @CacheEvict
     public int saveOrUpdate(BhDictionaryLine bhDictionaryLine) {
         BhDictionaryLine dictionaryLine = bhDictionaryLineMapper.selectByLine(bhDictionaryLine);
         int res = 0;
@@ -96,6 +101,7 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
         return res;
     }
 
+    @CacheEvict
     public int deleteDictionaryDetail(String[] lineIds) {
         List<String> lineIdList = Arrays.asList(lineIds);
         int res = bhDictionaryLineMapper.deleteDictionaryDetail(lineIdList);
@@ -103,5 +109,17 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
             throw new BusinessException("删除行配置异常", Constant.BUSSINESS_ERROR_CODE);
         }
         return res;
+    }
+
+    @Override
+    @Cacheable(value="bohua", key="#root.methodName")
+    public List<BhDictionaryHeader> findAllDictionaryHeader() {
+        return bhDictionaryHeaderMapper.selectAll();
+    }
+
+    @Override
+    @Cacheable(value="bohua", key="#root.methodName")
+    public List<BhDictionaryLine> findAllDictionaryDetail() {
+        return bhDictionaryLineMapper.selectAll();
     }
 }

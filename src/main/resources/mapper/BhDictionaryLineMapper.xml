@@ -173,4 +173,10 @@
       #{lineIdList}
     </foreach>
   </update>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from bh_dictionary_line
+  </select>
 </mapper>
