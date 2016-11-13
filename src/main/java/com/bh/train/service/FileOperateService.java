@@ -3,6 +3,7 @@ package com.bh.train.service;
 import java.util.Map;
 
 import com.bh.train.common.vo.RspFileListVo;
+import com.bh.train.common.vo.RspUediterVo;
 import com.bh.train.common.vo.RspUploadVo;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,7 +20,7 @@ public interface FileOperateService {
 	 * @param remotepath 存放的文件夹
 	 * @return
 	 */
-	public RspUploadVo uploadFile(String realPath, MultipartFile file, String remotepath,String filename);
+	public RspUediterVo uploadFile(String realPath, MultipartFile file, String remotepath, String filename);
 	/**
      * 上传图片到项目文件夹（并压缩）
 	 * @param filename 指定的文件名
@@ -28,7 +29,7 @@ public interface FileOperateService {
 	 * @param height
 	 * @return
 	 */
-	public RspUploadVo uploadImage(String realPath, MultipartFile file, String filename, String remotepath, String width, String height);
+	public RspUediterVo uploadImage(String realPath, MultipartFile file, String filename, String remotepath, String width, String height);
 	
 	
 	/**

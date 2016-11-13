@@ -155,7 +155,7 @@ CREATE TABLE `bh_notice` (
 -- ----------------------------
 DROP TABLE IF EXISTS `bh_permission`;
 CREATE TABLE `bh_permission` (
-  `prmission_id` int(11) NOT NULL AUTO_INCREMENT,
+  `permission_id` int(11) NOT NULL AUTO_INCREMENT,
   `permission_name` varchar(50) NOT NULL,
   `permission_code` varchar(50) NOT NULL,
   `description` varchar(500) NOT NULL,

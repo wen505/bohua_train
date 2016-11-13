@@ -28,13 +28,13 @@ var add_notice = {
 			type : 'post',
 			success : function(data) {
 				var result= eval('('+data+')');
-				if(result.error==0){
+				if(result.state=='SUCCESS'){
 					$("#isUpload").val('true');
-					$("#imageUrl").val(result.headicon)
+					$("#imageUrl").val(result.original)
 					add_notice.add();
 				}else {
 					$("#isUpload").val('');
-					commonUtil.checkingshowmsg(false, result.message, "", "", "errormsg");
+					commonUtil.checkingshowmsg(false, "上传失败！", "", "", "errormsg");
 				}
 			},
 			error : function () {

@@ -1,18 +1,24 @@
 package com.bh.train.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.baidu.ueditor.ActionEnter;
 import com.bh.train.common.Constant;
 import com.bh.train.common.controller.BaseController;
 import com.bh.train.common.exception.BusinessException;
 import com.bh.train.common.vo.RspData;
 import com.bh.train.common.vo.RspFileListVo;
+import com.bh.train.common.vo.RspUediterVo;
 import com.bh.train.common.vo.RspUploadVo;
 import com.bh.train.service.FileOperateService;
 import org.springframework.stereotype.Controller;
@@ -27,10 +33,28 @@ import org.springframework.web.multipart.MultipartFile;
  * 
  */
 @Controller
-@RequestMapping("back/fileOperate")
+@RequestMapping(value = "/back/fileOperate")
 public class FileOperateController extends BaseController<FileOperateController> {
 	@Resource
 	private FileOperateService fileOperateService;
+
+
+		@RequestMapping("/dispatch.do")
+		public void config(String action) {
+			getResponse().setContentType("application/json");
+			String rootPath = getRequest().getSession().getServletContext().getRealPath("/");
+
+			try {
+				String exec = new ActionEnter(getRequest(), rootPath).exec();
+				PrintWriter writer = getResponse().getWriter();
+				writer.write(exec);
+				writer.flush();
+				writer.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
 
 	/**
 	 * 上传文件
@@ -38,20 +62,20 @@ public class FileOperateController extends BaseController<FileOperateController>
 	 * @param file
 	 * @return
 	 */
-	@RequestMapping("/uploadFile.do")
+	@RequestMapping(value = "/uploadFile.do")
 	@ResponseBody
-	public RspUploadVo uploadFile(MultipartFile file,
+	public RspUediterVo uploadFile(MultipartFile file,
 			String remotePeath, String filNeame) {
-		RspUploadVo dataMap;
+		RspUediterVo dataMap;
 		try {
 			String contentType = file.getContentType();
 			dataMap = fileOperateService.uploadFile(getRealPath(),file, remotePeath,filNeame);
 		} catch (BusinessException e) {
 			logger.error(e.getMessage(), e);
-			dataMap = new RspUploadVo();
-			dataMap.setError(1);
-			dataMap.setMessage("上传文件失败！");
-			return dataMap;
+//			dataMap = new RspUploadVo();
+//			dataMap.setError(1);
+//			dataMap.setMessage("上传文件失败！");
+			return RspUediterVo.error();
 		}
 		return dataMap;
 	}
@@ -64,17 +88,18 @@ public class FileOperateController extends BaseController<FileOperateController>
 	@RequestMapping(value = "/uploadFileStr.do", produces = "text/html; charset=utf-8")
 	@ResponseBody
 	public String uploadFileStr(MultipartFile file,
-										  String remotePeath, String fileName) {
-		RspUploadVo dataMap;
+										  String remotePath, String fileName) {
+		RspUediterVo dataMap;
 		String realPath = getSession().getServletContext().getRealPath("");
 		try {
 			String contentType = file.getContentType();
-			dataMap = fileOperateService.uploadFile(getRealPath(),file, remotePeath,fileName);
+			dataMap = fileOperateService.uploadFile(getRealPath(),file, remotePath,fileName);
 		} catch (BusinessException e) {
 			logger.error(e.getMessage(), e);
-			dataMap = new RspUploadVo();
-			dataMap.setError(1);
-			dataMap.setMessage("上传文件失败！");
+//			dataMap = new RspUploadVo();
+//			dataMap.setError(1);
+//			dataMap.setMessage("上传文件失败！");
+			dataMap=RspUediterVo.error();
 		}
 		return JSON.toJSONString(dataMap);
 	}
@@ -86,19 +111,19 @@ public class FileOperateController extends BaseController<FileOperateController>
 	 */
 	@RequestMapping("/uploadImage.do")
 	@ResponseBody
-	public RspUploadVo uploadImage(MultipartFile file,
+	public RspUediterVo uploadImage(MultipartFile file,
 			String remotePath, String fileName) {
-		RspUploadVo dataMap;
+		RspUediterVo dataMap;
 		String width= super.getRequest().getParameter("width");
 		String height= super.getRequest().getParameter("height");
 		try {
 			dataMap = fileOperateService.uploadImage(getRealPath(),file, fileName, remotePath, width, height);
 		} catch (BusinessException e) {
 			logger.error(e.getMessage(), e);
-			dataMap = new RspUploadVo();
-			dataMap.setError(1);
-			dataMap.setMessage("上传文件失败！");
-			return dataMap;
+//			dataMap = new RspUploadVo();
+//			dataMap.setError(1);
+//			dataMap.setMessage("上传文件失败！");
+			return RspUediterVo.error();
 		}
 		return dataMap;
 	}
@@ -112,17 +137,17 @@ public class FileOperateController extends BaseController<FileOperateController>
 	@ResponseBody
 	public String uploadImageStr(MultipartFile file,
 								   String remotePath, String fileName) {
-		RspUploadVo dataMap;
+		RspUediterVo dataMap;
 		String width= super.getRequest().getParameter("width");
 		String height= super.getRequest().getParameter("height");
 		try {
 			dataMap = fileOperateService.uploadImage(getRealPath(),file, fileName, remotePath, width, height);
 		} catch (BusinessException e) {
 			logger.error(e.getMessage(), e);
-			dataMap = new RspUploadVo();
-			dataMap.setError(1);
-			dataMap.setMessage("上传文件失败！");
-			return JSON.toJSONString(dataMap);
+//			dataMap = new RspUploadVo();
+//			dataMap.setError(1);
+//			dataMap.setMessage("上传文件失败！");
+			return JSON.toJSONString(RspUediterVo.error());
 		}
 		return JSON.toJSONString(dataMap);
 	}

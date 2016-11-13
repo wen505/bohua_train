@@ -11,6 +11,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
+
+import com.alibaba.druid.sql.visitor.functions.If;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGEncodeParam;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
@@ -105,8 +107,19 @@ public class ImageCompressUtil {
 			int deskHeight = 0;// 缩略图高
 			int deskWidth = 0;// 缩略图宽
 			double srcScale = (double) srcHeight / srcWidth;
-			/**缩略图宽高算法*/
-			if ((double) srcHeight > comBase || (double) srcWidth > comBase) {
+			if (scale==0){
+				if(srcHeight>srcWidth&&srcHeight>800){
+					deskHeight = (int) 800;
+					deskWidth = srcWidth * deskHeight / srcHeight;
+				}else if (srcHeight>1600){
+					deskWidth = (int) 1600;
+					deskHeight = srcHeight * deskWidth / srcWidth;
+				}else{
+					deskHeight = srcHeight;
+					deskWidth = srcWidth;
+				}
+			///**缩略图宽高算法*/
+			}else if ((double) srcHeight > comBase || (double) srcWidth > comBase) {
 				if (srcScale >= scale || 1 / srcScale > scale) {
 					if (srcScale >= scale) {
 						deskHeight = (int) comBase;

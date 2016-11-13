@@ -6,6 +6,7 @@ import com.bh.train.common.util.ImageCompressUtil;
 import com.bh.train.common.util.ServiceUtil;
 import com.bh.train.common.vo.RspFileListVo;
 import com.bh.train.common.vo.RspPreviewImgVo;
+import com.bh.train.common.vo.RspUediterVo;
 import com.bh.train.common.vo.RspUploadVo;
 import com.bh.train.service.FileOperateService;
 import org.apache.log4j.Logger;
@@ -26,7 +27,7 @@ public class FileOperateServiceImpl extends BaseService implements FileOperateSe
 
     private Logger logger =  Logger.getLogger(FileOperateServiceImpl.class);
     @Override
-    public RspUploadVo uploadFile(String realPath,MultipartFile file, String remotepath,String filename) {
+    public RspUediterVo uploadFile(String realPath, MultipartFile file, String remotepath, String filename) {
         boolean flag = false;
         String separator= System.getProperty("file.separator");
         String  imageName ="";
@@ -61,21 +62,23 @@ public class FileOperateServiceImpl extends BaseService implements FileOperateSe
             e.printStackTrace();
             logger.error(e.getMessage(), e);
         }
-        RspUploadVo rspUploadVo = new RspUploadVo();
+//        RspUediterVo rspUploadVo = new RspUediterVo();
         if(flag){
-            rspUploadVo.setError(0);
-            rspUploadVo.setHeadicon(imageName);
-            rspUploadVo.setUrl("/"+Constant.UPLOAD_PATH+"/"+remotepath+"/"+imageName);
+            return RspUediterVo.success("/"+Constant.UPLOAD_PATH+"/"+remotepath+"/"+imageName,
+                    file.getSize(),imageName,file.getContentType());
+//            rspUploadVo.setHeadicon(imageName);
+//            rspUploadVo.setUrl("/"+Constant.UPLOAD_PATH+"/"+remotepath+"/"+imageName);
 
         }else{
-            rspUploadVo.setError(1);
-            rspUploadVo.setMessage("上传文件失败！");
+//            rspUploadVo.setError(1);
+//            rspUploadVo.setMessage("上传文件失败！");
+
+            return RspUediterVo.error();
         }
-        return rspUploadVo;
     }
 
     @Override
-    public RspUploadVo uploadImage(String realPath, MultipartFile file, String filename, String remotepath, String width, String height) {
+    public RspUediterVo uploadImage(String realPath, MultipartFile file, String filename, String remotepath, String width, String height) {
         boolean flag = false;
         String separator= System.getProperty("file.separator");
         String imageName="";
@@ -103,7 +106,7 @@ public class FileOperateServiceImpl extends BaseService implements FileOperateSe
                 int h= Integer.parseInt(height);
                 ImageCompressUtil.saveMinPhoto(file.getInputStream(), url, h,  1d);
             }else{
-                file.getSize();
+                ImageCompressUtil.saveMinPhoto(file.getInputStream(), url, 0,  0);
             }
             flag = true;
         } catch (IllegalStateException e) {
@@ -119,17 +122,29 @@ public class FileOperateServiceImpl extends BaseService implements FileOperateSe
             e.printStackTrace();
             logger.error(e.getMessage(), e);
         }
-        RspUploadVo rspUploadVo = new RspUploadVo();
         if(flag){
-            rspUploadVo.setError(0);
-            rspUploadVo.setHeadicon(imageName);
-            rspUploadVo.setUrl("/"+Constant.UPLOAD_PATH+"/"+remotepath+"/"+imageName);
+            return RspUediterVo.success("/"+Constant.UPLOAD_PATH+"/"+remotepath+"/"+imageName,
+                    file.getSize(),imageName,file.getContentType());
+//            rspUploadVo.setHeadicon(imageName);
+//            rspUploadVo.setUrl("/"+Constant.UPLOAD_PATH+"/"+remotepath+"/"+imageName);
 
         }else{
-            rspUploadVo.setError(1);
-            rspUploadVo.setMessage("上传文件失败！");
+//            rspUploadVo.setError(1);
+//            rspUploadVo.setMessage("上传文件失败！");
+
+            return RspUediterVo.error();
         }
-        return rspUploadVo;
+//        RspUploadVo rspUploadVo = new RspUploadVo();
+//        if(flag){
+//            rspUploadVo.setError(0);
+//            rspUploadVo.setHeadicon(imageName);
+//            rspUploadVo.setUrl("/"+Constant.UPLOAD_PATH+"/"+remotepath+"/"+imageName);
+//
+//        }else{
+//            rspUploadVo.setError(1);
+//            rspUploadVo.setMessage("上传文件失败！");
+//        }
+//        return rspUploadVo;
     }
 
     @Override

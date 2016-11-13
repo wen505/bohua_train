@@ -700,7 +700,8 @@ var commonUtil = {
 	 * 常量定义
 	 */
 	constant :{
-		notice : 'notice'//模板公共
+		notice : 'notice',//模板公共
+		noticeImage : 'noticeImage/'+new Date().getFullYear()+ new Date().getMonth()+new Date().getDate()//模板公共
 	}
 
 };

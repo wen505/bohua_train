@@ -7,7 +7,7 @@ var job_request = UE.getEditor('job_request',{
 	'directionalityltr', 'directionalityrtl', 'indent', '|',
 	'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
 	'link', 'unlink', 'anchor', '|','emotion', 'scrawl',  'map',  'insertframe', 'insertcode',  'pagebreak', 'template', 'background', '|',
-	'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
+	'horizontal', 'date', 'time', 'spechars',  'wordimage', '|',
 	'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
 	'print', 'preview', 'searchreplace', 'drafts', 'help'
    ]],
@@ -23,7 +23,7 @@ var job_duty = UE.getEditor('job_duty',{
 		'directionalityltr', 'directionalityrtl', 'indent', '|',
 		'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
 		'link', 'unlink', 'anchor', '|','emotion', 'scrawl',  'map',  'insertframe', 'insertcode',  'pagebreak', 'template', 'background', '|',
-		'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
+		'horizontal', 'date', 'time', 'spechars',  'wordimage', '|',
 		'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
 		'print', 'preview', 'searchreplace', 'drafts', 'help'
 	]],

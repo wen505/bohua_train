@@ -47,6 +47,11 @@
 			});
 		}
 </script>
+	<style>
+		img {
+			max-width: 100%; /*图片自适应宽度*/
+		}
+	</style>
 </head>
 <body style="margin: 0px;padding: 0px;" onunload="noticeoperate.onbeforeClose()">
 <form id="myForm"  method="post"
@@ -82,7 +87,7 @@
 			</a>
 			</div>
 			<div style="margin-top: 11px;">
-				<script id="editor" type="text/plain" style="width:99%;height:300px;"></script>
+				<script id="editor" type="text/plain" style="width:95%;height:250px;"></script>
 
 			</div>
 
@@ -90,6 +95,7 @@
 
 
 	</form>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/static/plugin/ueditor1_4_3_3/lang/zh-cn/zh-cn.js"></script>
 	<script type="text/javascript"
 			src="${pageContext.request.contextPath}/static/js/back/notice/noticeoperate.js"></script>
 	<div align="center" class="bottom_div" style="z-index: 999">
