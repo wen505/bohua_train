@@ -3,12 +3,12 @@
 div {
     border: 0px solid transparent;
 }
-
 * {
     margin: 0px auto;
-    padding: 0px;
+
     list-style-type: none;
 }
+
 
 a {
     text-decoration: none;

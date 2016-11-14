@@ -20,6 +20,14 @@ public interface NoticeService {
     public PageController<BhNotice> find(BhNotice bhNotice , String page , String rows);
 
     /**
+     * 分页查询
+     * @param bhNotice
+     * @param page
+     * @return
+     */
+    public List<BhNotice> findFirstPage(BhNotice bhNotice , String page , String rows);
+
+    /**
      * 根据id查询
      * @param noticeId
      * @return

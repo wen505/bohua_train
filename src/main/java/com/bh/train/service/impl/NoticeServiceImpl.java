@@ -31,6 +31,18 @@ public class NoticeServiceImpl extends BaseService implements NoticeService {
     }
 
     @Override
+    public List<BhNotice> findFirstPage(BhNotice bhNotice, String page, String rows) {
+        if(null==bhNotice){
+            bhNotice = new BhNotice();
+        }
+        int[] pageNumber = super.pageNumber(page,rows);
+        bhNotice.setLimit(pageNumber[1]);
+        bhNotice.setStart(pageNumber[0]);
+        List<BhNotice> bhNotices = bhNoticeMapper.selectPage(bhNotice);
+        return  bhNotices;
+    }
+
+    @Override
     public PageController<BhNotice> find(BhNotice bhNotice, String page, String rows) {
         if(null==bhNotice){
             bhNotice = new BhNotice();
