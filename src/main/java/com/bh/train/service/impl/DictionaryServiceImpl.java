@@ -56,7 +56,7 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
     }
 
     @Override
-    @CacheEvict
+    @CacheEvict(value = "bohua")
     public int deleteDictionaryHeaders(List<String> headerCodes){
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("updateTime", new Date());
@@ -88,7 +88,7 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
         return bhDictionaryLineMapper.selectByHeaderCode(headerCode);
     }
 
-    @CacheEvict
+    @CacheEvict(value = "bohua")
     public int saveOrUpdate(BhDictionaryLine bhDictionaryLine) {
         BhDictionaryLine dictionaryLine = bhDictionaryLineMapper.selectByLine(bhDictionaryLine);
         int res = 0;
@@ -101,7 +101,7 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
         return res;
     }
 
-    @CacheEvict
+    @CacheEvict(value = "bohua")
     public int deleteDictionaryDetail(String[] lineIds) {
         List<String> lineIdList = Arrays.asList(lineIds);
         int res = bhDictionaryLineMapper.deleteDictionaryDetail(lineIdList);

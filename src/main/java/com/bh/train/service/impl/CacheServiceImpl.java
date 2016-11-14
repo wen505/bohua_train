@@ -50,6 +50,7 @@ public class CacheServiceImpl implements CacheService {
      * @param o2 value
      */
     public void pushCache(Object o1, Object o2) {
+        LOGGER.info("pushCache, key值:" + o1.toString());
         Cache cache = cacheManager.getCache(Constant.CACHE_NAME);
         cache.put(o1, o2);
     }
@@ -60,7 +61,8 @@ public class CacheServiceImpl implements CacheService {
      * @return
      */
     public Object getCache(Object o1) {
+        LOGGER.info("getCache, key值:" + o1.toString());
         Cache cache = cacheManager.getCache(Constant.CACHE_NAME);
-        return cache.get(o1).get();
+        return cache.get(o1.toString()).get();
     }
 }
