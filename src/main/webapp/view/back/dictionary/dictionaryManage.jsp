@@ -32,7 +32,7 @@
 				<td><input type="text" id="headerCode" name="headerCode" value="" class="easyui-input" size=20 /></td>
 				<td>配置类型:</td>
 				<td>
-					<input id="dictionaryType" class="easyui-combobox" name="dept" data-options="valueField:'id',textField:'text',url:'${ctx}/'" />
+					<input id="dictionaryType" class="easyui-combobox" name="dept" data-options="valueField:'id',textField:'text',url:'${ctx}/back/common/getSelectData?headerCode=DICTIONARYTYPE'" />
 					<%--<input type="text" id="dictionaryType" name="dictionaryType" value="" class="easyui-input" size=20 />--%>
 				</td>
 				<td><a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="dictionaryManager.selectClick()" id="select">查询</a></td>

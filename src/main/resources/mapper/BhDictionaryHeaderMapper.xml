@@ -170,5 +170,6 @@
     select
     <include refid="Base_Column_List" />
     from bh_dictionary_header
+    WHERE enabled_flag='Y'
   </select>
 </mapper>
