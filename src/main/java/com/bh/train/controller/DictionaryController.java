@@ -63,23 +63,6 @@ public class DictionaryController extends BaseController<DictionaryController> {
         }
     }
 
-    @RequestMapping("/initPage")
-    @ResponseBody
-    public RspData initPage() {
-        RspData rspData = new RspData();
-        List<SelectVo> result = new ArrayList<SelectVo>();
-        SelectVo selectVo = new SelectVo();
-        selectVo.setId("user");
-        selectVo.setText("自定义");
-        result.add(selectVo);
-        selectVo.setId("system");
-        selectVo.setText("系统");
-        result.add(selectVo);
-        Map<String, List> map = new HashMap<String, List>();
-        map.put("dictionaryType", result);
-        return RspData.success(map);
-    }
-
     /**
      * 添加字典配置大类
      * @param bhDictionaryHeader
