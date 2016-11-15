@@ -65,4 +65,23 @@ public class CacheServiceImpl implements CacheService {
         Cache cache = cacheManager.getCache(Constant.CACHE_NAME);
         return cache.get(o1.toString()).get();
     }
+
+    /**
+     * 清除缓存
+     */
+    public void clearCache() {
+        LOGGER.info("clearCache......");
+        Cache cache = cacheManager.getCache(Constant.CACHE_NAME);
+        cache.clear();
+    }
+
+    /**
+     * 通过key值删除缓存
+     * @param o1
+     */
+    public void evictCache(Object o1) {
+        LOGGER.info("evictCache......");
+        Cache cache = cacheManager.getCache(Constant.CACHE_NAME);
+        cache.evict(o1.toString());
+    }
 }
