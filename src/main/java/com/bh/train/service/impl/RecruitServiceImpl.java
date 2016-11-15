@@ -66,4 +66,9 @@ public class RecruitServiceImpl extends BaseService implements RecruitService {
         int count = bhRecruitMapper.updateByPrimaryKeySelective(bhRecruit);
         return returnResult(count);
     }
+
+    @Override
+    public List<BhRecruitWithBLOBs> selectSome(BhRecruit record) {
+        return bhRecruitMapper.selectSome(record);
+    }
 }

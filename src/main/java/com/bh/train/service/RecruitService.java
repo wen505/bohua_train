@@ -44,5 +44,10 @@ public interface RecruitService {
      * @return
      */
     public boolean  update(BhRecruitWithBLOBs bhRecruit);
-    
+    /**
+     * 查询不分页
+     * @param record
+     * @return
+     */
+    List<BhRecruitWithBLOBs> selectSome(BhRecruit record);
 }

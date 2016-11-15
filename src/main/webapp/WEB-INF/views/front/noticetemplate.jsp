@@ -14,25 +14,8 @@
 <meta name="viewport"
 	content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>公告详情</title>
-<link href="${pageContext.request.contextPath}/static/css/front/main.css" rel="stylesheet" type="text/css"/>
+	<%@ include file="/view/common/front_css.jsp"%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/common/jquery-1.8.2.min.js"></script>
-<style type="text/css">
-*{
-	margin: 0px auto;
-	padding: -1px;
-	list-style-type: none;
-}
-
-#title .notie_header {
-	font-size: 30px;
-	font-weight: 700;
-	line-height: 42px;
-	color: #444;
-}
-#contents {
-    line-height: 2.3rem;
-}
-</style>
 </head>
 
 <body>
@@ -42,28 +25,20 @@
 
 </div>
  <input type="hidden" id="realpath" value="${pageContext.request.contextPath}"/>
-	<div id="box">
-		<div id="title">
-			<div class="title_box" align="center">
-				<p class="notie_header">${notice.noticeName}</p>
-			</div>
-			<div id="header_all" style="display: inline-block;width: 100%">
-				<div class="CompanyName"
-					style="font-size: 15px;
-				    display: inline-block;
-				    color: #666666;float: right;margin-right: 22px;">发布时间：${addTime}</div>
-			</div>
-
+<div class="ddiv" >
+	<div class="teacher_center"style="height: 100%;" >
+		<h1>${notice.noticeName}</h1>
+		<hr color="#46474C" class="hra" style="width:80px;" size="1"/>
+		<hr color="#BAC9C6" class="hrb" style="margin-left:188px;" size="1"/>
+		<div style="
+		 margin-top: 36px;
+    margin-left: 10px;
+    margin-right: 10px;">
+			${notice.noticeContent}
 		</div>
-		<div id="contents" >
-			<div id="content_text">
-				<div class="my-gallery" data-pswp-uid="1" >${notice.noticeContent}</div>
-			</div>
-		</div>
-
-
 
 	</div>
+</div>
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/plugin/photoswipe/jquery.lazyload.js"></script>
  <script type="text/javascript">

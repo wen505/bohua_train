@@ -4,7 +4,10 @@ import com.bh.train.common.controller.BaseController;
 import com.bh.train.common.exception.BusinessException;
 import com.bh.train.common.vo.RspData;
 import com.bh.train.model.BhNotice;
+import com.bh.train.model.BhRecruit;
+import com.bh.train.model.BhRecruitWithBLOBs;
 import com.bh.train.service.NoticeService;
+import com.bh.train.service.RecruitService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +26,8 @@ import java.util.List;
 public class FrontController extends BaseController<FrontController>{
     @Resource
     private NoticeService noticeService;
-
+    @Resource
+    private RecruitService  recruitService;
     /**
      * 分页查询
      *
@@ -37,6 +41,26 @@ public class FrontController extends BaseController<FrontController>{
             modelAndView.addObject("notice",bhNotice);
             modelAndView.addObject("addTime",new SimpleDateFormat("yyyy/MM/dd").format(bhNotice.getAddTime()));
             modelAndView.setViewName("/front/noticetemplate");
+        } catch (BusinessException e) {
+            e.printStackTrace();
+            logger.error(e.getMessage(), e);
+            modelAndView.setViewName("/common/error");
+        }
+        return modelAndView;
+    }
+
+    /**
+     * 分页查询
+     *
+     * @return
+     */
+    @RequestMapping("/getRecruitInfo")
+    public ModelAndView getRecruitInfo() {
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            List<BhRecruitWithBLOBs> bhRecruits = recruitService.selectSome(null);
+            modelAndView.addObject("bhRecruits",bhRecruits);
+            modelAndView.setViewName("/front/add");
         } catch (BusinessException e) {
             e.printStackTrace();
             logger.error(e.getMessage(), e);

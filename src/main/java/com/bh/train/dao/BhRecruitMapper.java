@@ -41,4 +41,11 @@ public interface BhRecruitMapper {
      */
     int updatbatchRecruitEnabledFlag(List list);
 
+    /**
+     * 查询不分页
+     * @param record
+     * @return
+     */
+    List<BhRecruitWithBLOBs> selectSome(BhRecruit record);
+
 }

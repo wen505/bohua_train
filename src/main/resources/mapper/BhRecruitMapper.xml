@@ -155,7 +155,7 @@
     limit #{start},#{limit}
   </select>
   <!--查询记录数-->
-  <select id="selectCount" parameterType="com.bh.train.model.BhNotice" resultType="java.lang.Integer">
+  <select id="selectCount" parameterType="com.bh.train.model.BhRecruit" resultType="java.lang.Integer">
     SELECT  COUNT(1) FROM  bh_recruit b
     WHERE  b.enabled_flag='Y'
     <if test="recruitJob!=null and recruitJob!=''" >
@@ -164,13 +164,21 @@
   </select>
   <!-- 批量修改用户信息的可用状态 -->
   <update id="updatbatchRecruitEnabledFlag" parameterType="java.util.List">
-    UPDATE bh_notice
+    UPDATE bh_recruit
     set enabled_flag = 'N'
-    WHERE notice_id IN
+    WHERE recruit_id IN
     <foreach close=")" collection="list" item="item" open="("
              separator=",">
-      #{item.recruit_id,jdbcType=INTEGER}
+      #{item.recruitId,jdbcType=INTEGER}
     </foreach>
   </update>
-
+  <!--查询不分页-->
+  <select id="selectSome"  parameterType="com.bh.train.model.BhRecruit" resultMap="ResultMapWithBLOBs">
+    SELECT  * FROM  bh_recruit b
+    WHERE  b.enabled_flag='Y'
+    <if test="recruitJob!=null and recruitJob!=''" >
+      and b.recruit_job LIKE  CONCAT('%', #{recruitJob,jdbcType=VARCHAR},'%')
+    </if>
+    ORDER BY SN DESC
+  </select>
 </mapper>
