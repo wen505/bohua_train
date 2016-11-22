@@ -48,7 +48,7 @@
 					<td class="tab_style">员工职位：</td>
 					<td class="tab_input"><input name="userType"
 												 id="userType" type="text"  size=20
-												 class="easyui-input" /></td>
+												 class="easyui-combobox" data-options="panelHeight:'120px',valueField:'id',textField:'text',url:'${pageContext.request.contextPath}/back/common/getSelectData?headerCode=userType'" /></td>
 				</tr><tr>
 				<td class="tab_style">学历：</td>
 				<td class="tab_input"><input name="educationalStatus"

@@ -5,7 +5,7 @@ var update_user={
         $('#loginName').val(row.loginName);
         $('#userName').val(row.userName);
         $('#sex').combobox("setValue", row.sex);
-        $('#userType').val( row.userType);
+        $('#userType').combobox("setValue", row.userType);
         $('#telephone').val(row.telephone);
         $('#email').val(row.email);
         $('#indentity').val(row.indentity);

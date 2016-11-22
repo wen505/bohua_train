@@ -17,9 +17,11 @@
 			<thead>
 				<tr>
 					<th data-options="field:'userId',align:'center',checkbox:true"scope="col" width="7%"></th>
-					<th data-options="field:'loginName',editor:'text'" width="20%">登录名称</th>
-					<th data-options="field:'userName',editor:'text'" width="20%">姓名</th>
-                    <th data-options="field:'sex',editor:'text'" formatter="commonUtil.sexFormatter" width="20%">性别</th>
+					<th data-options="field:'loginName',editor:'text'" width="15%">登录名称</th>
+					<th data-options="field:'userName',editor:'text'" width="15%">姓名</th>
+                    <th data-options="field:'sex',editor:'text'" formatter="commonUtil.sexFormatter" width="5%">性别</th>
+					<th data-options="field:'telephone',editor:'text'" width="20%">电话</th>
+					<th data-options="field:'indentity',editor:'text'" width="20%">身份证号</th>
 					<th data-options="field:'opera',editor:'text'" formatter="userManager.resetPwd" width="20%">操作</th>
 				</tr>
 			</thead>

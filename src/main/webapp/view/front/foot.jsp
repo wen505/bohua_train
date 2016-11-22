@@ -6,6 +6,15 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<style type="text/css">
+    #FloatMenu {display:none;position:fixed;_position:absolute;bottom:30px;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight)-230+"px");left:91%;width:70px;zoom:1;}
+    #FloatMenu a#totop{background:#635448;color:#fff;display:block;width:90px;height:30px;font:normal 12px/30px 'MicroSoft Yahei';text-align:center;-webkit-transition: all 0.2s ease-in-out;-moz-transition: all 0.2s ease-in-out;-o-transition: all 0.2s ease-in-out;-ms-transition: all 0.2s ease-in-out;transition: all 0.2s ease-in-out;}
+    #FloatMenu a#totop:hover {background:#ff6100;}
+</style>
+<div id="FloatMenu">
+    <a id="totop" href="javascript:;">回到顶部</a>
+
+</div>
 <!--底部-->
 <div class="foot">
     <div class="foot_all">
@@ -48,3 +57,18 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(window).scroll(function () {
+        if($(window).scrollTop()>1000){
+            $("#FloatMenu").show();
+        }else{
+            $("#FloatMenu").hide();
+        }
+
+    });
+    $("#FloatMenu").click(function () {
+        $('body').animate({ scrollTop: 0 }, 1000);
+        return false;
+    }) ;
+
+</script>
