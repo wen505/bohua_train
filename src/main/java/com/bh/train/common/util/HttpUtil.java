@@ -59,7 +59,7 @@ public class HttpUtil {
         client = HttpClients.custom().setConnectionManager(cm).build();
     }
 
-    public static String postJson(String url, String json) throws ConnectTimeoutException, SocketTimeoutException, Exception {
+    /*public static String postJson(String url, String json) throws ConnectTimeoutException, SocketTimeoutException, Exception {
         return post(url, json, "application/json", charset, connTimeout, readTimeout);
     }
 
@@ -79,15 +79,15 @@ public class HttpUtil {
     public static String postParameters(String url, Map<String, String> params, Integer connTimeout, Integer readTimeout) throws ConnectTimeoutException,
             SocketTimeoutException, Exception {
         return postForm(url, params, null, connTimeout, readTimeout);
-    }
+    }*/
 
-    public static String get(String url) throws Exception {
+    /*public static String get(String url) throws Exception {
         return get(url, charset, null, null);
     }
 
     public static String get(String url, String charset) throws Exception {
         return get(url, charset, connTimeout, readTimeout);
-    }
+    }*/
 
     /**
      * 发送一个 Post 请求, 使用指定的字符集编码.
@@ -102,7 +102,7 @@ public class HttpUtil {
      * @throws ConnectTimeoutException 建立链接超时异常
      * @throws SocketTimeoutException  响应超时
      * @throws Exception
-     */
+     *//*
     public static String post(String url, String body, String mimeType, String charset, Integer connTimeout, Integer readTimeout)
             throws ConnectTimeoutException, SocketTimeoutException, Exception {
         long startTime = System.currentTimeMillis();
@@ -144,10 +144,10 @@ public class HttpUtil {
             }
         }
         return result;
-    }
+    }*/
 
 
-    /**
+   /* *//**
      * 提交form表单
      *
      * @param url
@@ -158,7 +158,7 @@ public class HttpUtil {
      * @throws ConnectTimeoutException
      * @throws SocketTimeoutException
      * @throws Exception
-     */
+     *//*
     public static String postForm(String url, Map<String, String> params, Map<String, String> headers, Integer connTimeout, Integer readTimeout) throws ConnectTimeoutException,
             SocketTimeoutException, Exception {
         long startTime = System.currentTimeMillis();
@@ -211,10 +211,10 @@ public class HttpUtil {
             }
         }
         return result;
-    }
+    }*/
 
 
-    /**
+   /* *//**
      * 发送一个 GET 请求
      *
      * @param url
@@ -225,7 +225,7 @@ public class HttpUtil {
      * @throws ConnectTimeoutException 建立链接超时
      * @throws SocketTimeoutException  响应超时
      * @throws Exception
-     */
+     *//*
     public static String get(String url, String charset, Integer connTimeout, Integer readTimeout)
             throws ConnectTimeoutException, SocketTimeoutException, Exception {
         long startTime = System.currentTimeMillis();
@@ -265,7 +265,7 @@ public class HttpUtil {
             }
         }
         return result;
-    }
+    }*/
 
 
     /**
@@ -286,43 +286,43 @@ public class HttpUtil {
     }
 
 
-    /**
-     * 创建 SSL连接
-     *
-     * @return
-     * @throws GeneralSecurityException
-     */
-    private static CloseableHttpClient createSSLInsecureClient() throws GeneralSecurityException {
-        try {
-            SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
-                public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-                    return true;
-                }
-            }).build();
-
-            SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext, new X509HostnameVerifier() {
-
-                @Override
-                public boolean verify(String arg0, SSLSession arg1) {
-                    return true;
-                }
-
-                @Override
-                public void verify(String host, SSLSocket ssl) throws IOException {
-                }
-
-                @Override
-                public void verify(String host, X509Certificate cert) throws SSLException {
-                }
-
-                @Override
-                public void verify(String host, String[] cns, String[] subjectAlts) throws SSLException {
-                }
-
-            });
-            return HttpClients.custom().setSSLSocketFactory(sslsf).build();
-        } catch (GeneralSecurityException e) {
-            throw e;
-        }
-    }
+//    /**
+//     * 创建 SSL连接
+//     *
+//     * @return
+//     * @throws GeneralSecurityException
+//     */
+//    private static CloseableHttpClient createSSLInsecureClient() throws GeneralSecurityException {
+//        try {
+//            SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
+//                public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+//                    return true;
+//                }
+//            }).build();
+//
+//            SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext, new X509HostnameVerifier() {
+//
+//                @Override
+//                public boolean verify(String arg0, SSLSession arg1) {
+//                    return true;
+//                }
+//
+//                @Override
+//                public void verify(String host, SSLSocket ssl) throws IOException {
+//                }
+//
+//                @Override
+//                public void verify(String host, X509Certificate cert) throws SSLException {
+//                }
+//
+//                @Override
+//                public void verify(String host, String[] cns, String[] subjectAlts) throws SSLException {
+//                }
+//
+//            });
+//            return HttpClients.custom().setSSLSocketFactory(sslsf).build();
+//        } catch (GeneralSecurityException e) {
+//            throw e;
+//        }
+//    }
 }
