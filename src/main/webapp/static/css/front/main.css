@@ -3,7 +3,12 @@
 div {
     border: 0px solid transparent;
 }
-* {
+*{
+    margin: 0px auto;
+
+
+}
+.control{
     margin: 0px auto;
 
     list-style-type: none;

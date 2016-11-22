@@ -11,16 +11,19 @@
     #FloatMenu a#totop{background:#635448;color:#fff;display:block;width:90px;height:30px;font:normal 12px/30px 'MicroSoft Yahei';text-align:center;-webkit-transition: all 0.2s ease-in-out;-moz-transition: all 0.2s ease-in-out;-o-transition: all 0.2s ease-in-out;-ms-transition: all 0.2s ease-in-out;transition: all 0.2s ease-in-out;}
     #FloatMenu a#totop:hover {background:#ff6100;}
 </style>
+
 <div id="FloatMenu">
     <a id="totop" href="javascript:;">回到顶部</a>
 
 </div>
 <!--底部-->
+<a name="foot"></a>
+<!--底部-->
 <div class="foot">
     <div class="foot_all">
         <div class="foot_left">
             <div class="foot_left_one">
-                <ul>
+                <ul class="ul_clear">
                     <li class="foot_left_one_li" style="color:#fff; margin-top:-7px; margin-left:6px;">学院介绍</li>
                     <li class="foot_left_one_li" style="margin-top:4px;"><a style="color:#9A9EA7;"
                                                                             href="production.html">关于学院</a></li>
