@@ -78,9 +78,10 @@ $(function () {
                                 contentType : "application/json;charset=utf-8",
                                 success : function(data) {
                                     if (data.code=='1') {
-                                        commonUtil.successoperate("queryTable");
+                                        // commonUtil.successoperate("queryTable");
+                                        commonUtil.showMessages("操作成功", "提示消息", false, true);
                                     } else {
-                                        commonUtil.checkingshowmsg(false, "保存失败！", "", "", "errormsg");
+                                        commonUtil.checkingshowmsg(false, data.msg, "", "", "errormsg");
                                     }
 
                                 },
@@ -134,21 +135,36 @@ $(function () {
             }, '-'],
         onAfterEdit: function (rowIndex, rowData, changes) {
             //endEdit该方法触发此事件
+            console.info("=========================="+JSON.stringify(changes));
             console.info(rowData);
             rowData.headerCode = row.headerCode;
             console.log(JSON.stringify(rowData));
 
+            //获取新增的那条数据
+            var inserted = $("#queryTable").datagrid("getChanges", "inserted");
+            console.info("inserted:" + inserted);
+
+            //获取编辑(更新)的那条数据
+            var updated = $('#queryTable').datagrid('getChanges', 'updated'); //这里要特别留意，如果你启动了编辑，但是没有修改数据，点击保存（结束编辑）的时候是无法获取到数据的
+            console.info("updated:" + updated);
+            var url = "";
+            if(inserted.length > 0 ) {
+                url = commonUtil.getRealpath() + "/" + "back/dictionary/addOrEditDictionaryDetail/add";
+            }
+            else if(updated.length > 0 ) {
+                url = commonUtil.getRealpath() + "/" + "back/dictionary/addOrEditDictionaryDetail/update";
+            }
             $.ajax({
-                url : commonUtil.getRealpath()+"/"+"back/dictionary/addOrEditDictionaryDetail",
+                url : url,
                 type : "POST",
                 dataType : "json",
                 data : JSON.stringify(rowData),
                 contentType : "application/json",
                 success : function(data) {
                     if (data.code=='1') {
-                        commonUtil.successoperate("queryTable");
+                        commonUtil.showMessages("操作成功", "提示消息", false, true);
                     } else {
-                        commonUtil.checkingshowmsg(false, "保存失败！", "", "", "errormsg");
+                        commonUtil.showMessages(data.msg, "提示消息", false, true);
                     }
 
                 },

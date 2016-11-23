@@ -9,4 +9,8 @@ public interface CacheService {
     void pushCache(Object o1, Object o2);
 
     Object getCache(Object o1);
+
+    public void clearCache();
+
+    public void evictCache(Object o1);
 }

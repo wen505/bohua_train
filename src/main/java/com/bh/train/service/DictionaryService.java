@@ -24,7 +24,7 @@ public interface DictionaryService {
 
     public List<BhDictionaryLine> queryDetailByHeaderCode(String headerCode);
 
-    public int saveOrUpdate(BhDictionaryLine bhDictionaryLine);
+    public int saveOrUpdate(BhDictionaryLine bhDictionaryLine, String operateId);
 
     /**
      * 批量删除字典行表

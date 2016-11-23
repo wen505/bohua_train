@@ -31,6 +31,9 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
     @Resource
     private BhDictionaryLineMapper bhDictionaryLineMapper;
 
+    private static final String ADD_OPERATE = "add";
+
+    private static final String UPDATE_OPERATE = "update";
     @Override
     public PageController<BhDictionaryHeader> find(BhDictionaryHeader bhDictionaryHeader, String page, String rows) {
         if(null==bhDictionaryHeader){
@@ -46,17 +49,19 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
     }
 
     @Override
+    @CacheEvict(value = "bohua",allEntries=true)
     public int addDictionaryHeader(BhDictionaryHeader bhDictionaryHeader) {
         return bhDictionaryHeaderMapper.insertSelective(bhDictionaryHeader);
     }
 
     @Override
+    @CacheEvict(value = "bohua",allEntries=true)
     public int updateDictionaryHeader(BhDictionaryHeader bhDictionaryHeader) {
         return bhDictionaryHeaderMapper.updateByPrimaryKeySelective(bhDictionaryHeader);
     }
 
     @Override
-    @CacheEvict(value = "bohua")
+    @CacheEvict(value = "bohua",allEntries=true)
     public int deleteDictionaryHeaders(List<String> headerCodes){
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("updateTime", new Date());
@@ -88,20 +93,26 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
         return bhDictionaryLineMapper.selectByHeaderCode(headerCode);
     }
 
-    @CacheEvict(value = "bohua")
-    public int saveOrUpdate(BhDictionaryLine bhDictionaryLine) {
+    @CacheEvict(value = "bohua",allEntries=true)
+    public int saveOrUpdate(BhDictionaryLine bhDictionaryLine, String operateId) {
         BhDictionaryLine dictionaryLine = bhDictionaryLineMapper.selectByLine(bhDictionaryLine);
+        List<BhDictionaryLine> bhDictionaryLineList = queryDetailByHeaderCode(bhDictionaryLine.getHeaderCode());
         int res = 0;
-        if (dictionaryLine != null) {//更新
-            bhDictionaryLine.setLineId(dictionaryLine.getLineId());
-            res = bhDictionaryLineMapper.updateByPrimaryKeySelective(bhDictionaryLine);
-        } else {//新增
+        if (ADD_OPERATE.equals(operateId) && dictionaryLine != null) {
+            throw new BusinessException("操作失败,重复添加", Constant.BUSSINESS_ERROR_CODE);
+        } else if (ADD_OPERATE.equals(operateId)) {
             res = bhDictionaryLineMapper.insertSelective(bhDictionaryLine);
+        } else if (UPDATE_OPERATE.equals(operateId)) {
+            if (dictionaryLine != null && !bhDictionaryLine.getLineId().equals(dictionaryLine.getLineId())) {
+                throw new BusinessException("操作失败,修改数据有误", Constant.BUSSINESS_ERROR_CODE);
+            } else {
+                res = bhDictionaryLineMapper.updateByPrimaryKeySelective(bhDictionaryLine);
+            }
         }
         return res;
     }
 
-    @CacheEvict(value = "bohua")
+    @CacheEvict(value = "bohua",allEntries=true)
     public int deleteDictionaryDetail(String[] lineIds) {
         List<String> lineIdList = Arrays.asList(lineIds);
         int res = bhDictionaryLineMapper.deleteDictionaryDetail(lineIdList);

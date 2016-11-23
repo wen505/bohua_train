@@ -63,7 +63,7 @@ public class CacheServiceImpl implements CacheService {
     public Object getCache(Object o1) {
         LOGGER.info("getCache, key值:" + o1.toString());
         Cache cache = cacheManager.getCache(Constant.CACHE_NAME);
-        return cache.get(o1.toString()).get();
+        return cache.get(o1.toString()) == null ? null : cache.get(o1.toString()).get();
     }
 
     /**

@@ -19,7 +19,7 @@
 					<th data-options="field:'headerName',editor:'text'" width="20%">配置名称</th>
 					<th data-options="field:'headerCode',editor:'text'" width="20%">配置代码</th>
 					<th data-options="field:'dictionaryType',editor:'text', formatter: dictionaryManager.typeFormatter" width="20%">配置类型</th>
-					<th data-options="field:'memo',editor:'text'" width="40%">备注</th>
+					<th data-options="field:'memo',editor:'text'" width="36%">备注</th>
 				</tr>
 			</thead>
 		</table>
